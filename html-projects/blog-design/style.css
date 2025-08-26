@@ -1,0 +1,154 @@
+/* Main section alphabetical order.*/
+article{
+    font-size: 24px;
+}
+body{
+    background-color: saddlebrown;
+}
+footer{
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Roboto Slab', serif;
+}
+header{
+    
+    background-color: aliceblue;
+    padding-bottom: 20px;
+    
+}
+header img{
+    width: 220px;
+    height: 220px;
+    margin-top: -15px;
+    margin-left: 300px;
+    
+}
+h1{
+    font-size: 25px;
+    background-color: cadetblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+}
+h2{
+    padding-left: 10px;
+}
+nav{
+    background-color: cadetblue;
+    width: 860px;
+    margin-left: -10px;
+    font-family: 'Open Sans', sans-serif;
+        
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 45px;
+
+}
+nav li{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+nav ul{
+    text-align: center;
+    list-style: none;
+    margin: 0;
+}
+p{
+    padding-left: 10px;
+}
+
+/* Class section alphabetical order. */
+.blog h1{
+    font-family: 'Open Sans', sans-serif;
+
+}
+.feature{
+    background-color: white;
+    width: 400px;
+    height: 300px;
+    margin-left: 400px;
+}
+.feature figcaption{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+ background-color: dimgrey;
+  color: white;
+    font-family: 'Roboto Slab', serif;
+  
+}
+.feature p{
+    padding-left: 30px;
+    font-size: 24px;
+    color: deepskyblue;
+    font-family: 'Roboto Slab', serif;
+}
+.figure{
+    margin-bottom: -0.3em;
+    margin-left: -10%;
+    width: 100%;
+    
+    
+}
+.footer{
+    background-color: white;
+    margin-left: 50px;
+    height: 50px;
+    width: 730px;
+    background-color: white;
+    font-size: 20px;
+    padding-bottom: 20px;
+    color: cadetblue;
+}
+.image-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.image-container2{
+    width: 140px;
+    height: 220px;
+    float: right;
+    background-color: lightgray;
+    color: cadetblue;
+}
+.layout{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 30px;
+}
+.main{
+    background-color: beige;
+    width: 430px;
+    height: 500px;
+    margin-left: 50px;
+    font-family: 'Roboto Slab', serif;
+    color: cadetblue;
+}
+.main figcaption{
+   margin-top: -30px;
+}
+.page{
+    width: 840px;
+    background-color: lightgray;
+    margin-left: 550px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    
+}
+.sidebar{
+    width: 300px;
+    background-color: white;
+    font-family: 'Roboto Slab', serif;
+    color: cadetblue; 
+}
+
+
