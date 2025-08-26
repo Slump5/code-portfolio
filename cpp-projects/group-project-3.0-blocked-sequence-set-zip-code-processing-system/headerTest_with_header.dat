@@ -1,0 +1,11 @@
+20blocked_sequence_set,031.0,010,014,05ASCII,03512,0250,14headerTest.idx,18key:string,rbn:int,010,010,015,010,02-1,02-1,0
+08zip_code,09string(5),
+04city,10string(64),
+05state,09string(2),
+08latitude,12decimal(8,4),
+09longitude,12decimal(8,4),
+12345,Springfield,IL,39.7817,-89.6501
+23456,Riverside,CA,33.9533,-117.3961
+34567,Lakewood,OH,41.4819,-81.7984
+45678,Maplewood,MN,44.9530,-93.0275
+56789,Oakland,CA,37.8044,-122.2711

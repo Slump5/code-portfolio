@@ -1,0 +1,22 @@
+Script started on Fri 05 Apr 2024 07:32:06 PM CDT
+]0;we2743il@csci4:~[?1034h[we2743il@csci4 ~]$ lsscp we2743il@199.17.28.80: ./Q3and4/Downloads/ /Downloads/[K/Q3and4.txt[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfind Q3and4[Kls[Kcat Q3and4ls[Kcat Q3and4ls[Kfind Q3and4scp we2743il@199.17.28.80: ./Q3and4 /Downloads/Q3and4.txt[K/[1P/Downloads/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K[Kg++ -o program program.cpp[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kls
+end_of_array.txt  out_of_order.txt  question4PartD.cpp
+end_of_file.txt   Q3and4            Question4PartDScript
+]0;we2743il@csci4:~[we2743il@csci4 ~]$ g++ -0[Ko question4PartD question4PartD.cpp
+]0;we2743il@csci4:~[we2743il@csci4 ~]$ ./question4PartD
+Test case: End of file
+Array elements: 1 2 3 
+Reached end of file.
+
+Test case: Item out of order
+Array elements: 1 2 5 
+Encountered out-of-order item.
+
+Test case: End of array
+Array elements: 1 2 3 4 5 
+Array is full.
+
+]0;we2743il@csci4:~[we2743il@csci4 ~]$ exit
+exit
+
+Script done on Fri 05 Apr 2024 07:33:56 PM CDT

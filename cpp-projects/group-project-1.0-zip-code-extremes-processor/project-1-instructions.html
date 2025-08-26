@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSCI 331 &mdash; Fall 2024 &mdash; Group Project &mdash; Zip Code 1.0</title>
+    <style>
+	code{font-family: courier; font-weight:bold; color:MidnightBlue}
+    </style>
+</head>
+
+<body>
+
+<div class=Section1>
+
+<h1>CSCI 331 - Software Systems &mdash; Fall 2024</h1>
+
+<h2><u>Zip Code</u> Group Project 1.0</h2> 
+
+<p>
+<h3>Objective</h3>
+Process sequentially a CVS file using a buffer class.<br>
+<h3>Requirements</h3>
+<ol>
+    <li>Create a CSV (comma separated) file from this <a href="http://web.stcloudstate.edu/aanda/cs331/w19/us_postal_codes.xlsx">XLSX file</a>.</li>
+    <li>Write a <b>buffer class</b> which can <u>read</u> and <u>gather</u> a Zip Code <b>Record</b> from the Zip Code CSV file.
+    <li>Write an application program using those functions/methods that:</li>
+    <ol>
+	<li>uses the CSV data file to generate {directed to standard output} a table comprising
+	    an alphabetical listing of state IDs (two character), one state per row, where for each row, 
+	    the <b>East</b>ernmost (least longitude), <b>West</b>ernmost, <b>North</b>ernmost (greatest latitude), and <b>South</b>ernmost Zip Code in that state is listed, in that order.</li>
+	<ol>
+	    <li>{Precede the table with an appropriate <u>header row</u> displaying labels describing each column.}
+	</ol>
+    </ol>
+    <li>Document (<i>extensively</i>) your C++ source code with comments and Doxygen tags.
+    <li>Create a Doxygen PDF of your buffer class and application program code.</li>
+    <li>Show that this application produces identical results when you use another spreadsheet column/field (other than Zip Code) for sorting the rows before generating a CSV file.</li>
+</ol>
+<hr>
+<h2>WHAT TO TURN IN:</h2>
+	<ul>
+	    <li>a <i>preliminary</i> design document (<i>submitted at least one day before the C++ source files</i>)
+	    <li>the CSV file
+	    <li>the Doxygen PDF
+	    <li>the C++ source files <code>.h</code> &amp; <code>.cpp</code> 
+	    <li>the script file that was generated to demonstrate the running of the application program for the data sorted by Zip Code.
+	    <li>the (type)<a href="https://www.man7.org/linux/man-pages/man1/script.1.html">script</a> file that was generated to demonstrate the running of the application program for the data sorted by another column/field.
+	</ul>
+	(zip the <code>.cpp</code> source files: {see <a href="https://support.microsoft.com/en-us/help/14200/windows-compress-uncompress-zip-files">https://support.microsoft.com/en-us/help/14200/windows-compress-uncompress-zip-files</a>})<br>
+
+
+
+</div>
+
+</body>
+
+</html>

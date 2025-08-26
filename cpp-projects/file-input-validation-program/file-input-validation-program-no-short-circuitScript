@@ -1,0 +1,23 @@
+Script started on Fri 05 Apr 2024 07:44:33 PM CDT
+]0;we2743il@csci4:~[?1034h[we2743il@csci4 ~]$ ls
+end_of_array.txt  Q3and4              question4PartDNoShortCircuit.cpp
+end_of_file.txt   [0m[01;32mquestion4PartD[0m      question4PartDNoShortCircuitScript
+out_of_order.txt  question4PartD.cpp  Question4PartDScript
+]0;we2743il@csci4:~[we2743il@csci4 ~]$ g++ -o question4PartDNoShortCircuit question4PartDNoShortCir cuit.cpp
+]0;we2743il@csci4:~[we2743il@csci4 ~]$ ./question4PartDNoShortCircuit
+Test case: End of file
+Reached end of file.
+Array elements: 1 2 3 
+
+Test case: Item out of order
+Encountered out-of-order item.
+Array elements: 1 2 5 
+
+Test case: End of array
+Array is full.
+Array elements: 1 2 3 4 5 
+
+]0;we2743il@csci4:~[we2743il@csci4 ~]$ exit
+exit
+
+Script done on Fri 05 Apr 2024 07:45:00 PM CDT

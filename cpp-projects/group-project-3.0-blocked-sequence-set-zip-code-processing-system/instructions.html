@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSCI 331 &mdash; Fall 2024 &mdash; Group Project &mdash; Zip Code 3.0</title>
+    <style>
+	code{font-family: courier; font-weight:bold; color:MidnightBlue}
+    </style>
+</head>
+
+<body>
+
+<div class=Section1>
+
+<h1>CSCI 331 - Software Systems &mdash; Fall 2024</h1>
+
+<h2><u>Zip Code</u> Group Project 3.0</h2> 
+
+<p>
+<h2>Objectives and Requirements</h2>
+<ol>
+    <li>Generate a CSV (comma separated) file from this <a href="http://web.stcloudstate.edu/aanda/cs331/w19/us_postal_codes.xlsx">XLSX file</a>.</li>
+    <li>Convert the CSV file to a file structure format (beginning with a header record) where the fields are still comma separated, but the records are length indicated.</li>
+    <li>Generate a <i>blocked</i> <b>sequence set</b> file from the data file you created in Group Project 2.0</li>
+    <ul>
+	<li> Your blocked sequence set generation program's </u>command line</u> options should include:</li>
+	<ul>
+	    <li>the name of the blocked sequence set data file</li>
+	    <li>all other information necessary for the header file</li>
+	</ul>
+	<li> All blocks are the same size. (See the <b>Header Record Architecture</b> section below for the default size</li>
+	<li> Each block will contain a set of complete records (some blocks may have different counts of records) and a metadata architecture as shown in the <b>Block Architecture</b> section below</li>
+	<li> Unused or deleted blocks are <i>avail</i> list blocks (See Folk 6.2.2 &amp; 10.1 &ndash; 10.3)</li>
+    </ul>
+    <li>Process sequentially a blocked <b>sequence set</b> file using buffer classes. {functionality from Group Projects 1 &amp; 2}</li>
+    <li>Use both a <i>block</i> <u>buffer class</u> and a <i>record</i> <u>buffer class</u> to <u>read</u> and <u>unpack</u> Zip Code Records from a sequence set <b>block</b> into a sorted container of record objects.</li>
+    <ul>
+	<li> The <i>block</i> buffer unpacks a <i>record</i> from a block into a record buffer.</li>
+	<li> The <i>record</i> buffer unpacks <i>fields</i> from the record buffer into a record object.</li>
+    </ul>
+    <li><i>Modify</i> your data file <i>header record</i> <u>buffer class</u> to read and write the blocked sequence set data file header record</li>
+    <li><i>Repeat</i> Group Project 1.0 with this new blocked sequence set file.</li>
+    <li><i>Create</i> and use two blocked sequence set <u>dump</u> method that visibly aggregates Zip Codes into blocks including the respective predecessor &amp; successor R(elative)B(lock)N(umber) links.</br>
+	One dump method will list the blocks sequentially by their physical ordering; the other dump method will list the blocks sequentially by their logical ordering.</br>
+        (after initial creation, both dumps will generate identical output, but use of a non-appending avail block will make them different)</br>
+    <code>
+    <pre>
+        List Head:  RBN
+	Avail Head: RBN
+	RBN  key<sub>a</sub> key<sub>b</sub> &hellip; key<sub>i</sub> RBN 
+	RBN  *available*     RBN
+	RBN  key<sub>a</sub> key<sub>b</sub> &hellip; key<sub>j</sub> RBN 
+	&vellip;
+	RBN  key<sub>a</sub> key<sub>b</sub> &hellip; key<sub>k</sub> RBN 
+    </pre>
+    </code>
+
+    This dump format makes it rather easy to check the results of  insertions and deletions for appropriate changes &mdash; you could even use the <code>diff</code> program.</br>
+    It helps to use the smallest possible non-trivial sub-set of the data initially, so as to generate a dump which fits on a single page/window.
+    
+    </li>
+    <li>Create a <u>simple index</u> file which contains ordered pairs of keys (highest key in each block) &amp; block numbers.  (See Folk Figure 10.3)</li>
+    <li> Create a readable dump of the simple index </li>
+    <li>Generate (in RAM), write (as a file), and read (back into RAM), a <u>simple</u> primary key index [Folk Section 10.3] that can be used to display the Zip Code data for all Zip Codes listed on the command line.</br>
+	This index will store the ordered pairs: {&lt;<i>highest <b>key</b> in block</i>&gt;, &lt;RBN&gt;}</li>
+    <ul>
+	<li> Your blocked sequence set <u>search</u> program's </u>command line</u> options should include the name of the blocked sequence set data file</li>
+	<li>Use a command line flag (e.g. <code>-Z56301</code>) to indicate each Zip Code record to search for.</li>
+	<li>If the Zip Code record is not in the file, display a message to that effect.
+	    <ul>
+		<li>Note that to determine that a record is not in the file, the indexed <b>block</b> must be <u>read</u>, <u>unpack</u>ed, and <u>search</u>ed</li>
+	    </ul>
+	</li>
+	<li>Test Run Demonstration: for the blocked sequence set Zip Code data and simple index file pair</li>
+	<ol>
+	    <li>Create and run a <u>search</u> test program - include searches (on the command line) for several valid Zip Codes and at least one invalid Zip Code.</li>
+	    <ul>
+		<li>the program will load the simple primary key index file into an sorted container object in RAM</li>
+		<li>the program will <b>never</b> load the blocked sequence set Zip Code data file into RAM</li>
+	    </ul>
+	    <li>Create and run a record <u>addition</u> and <u>deletion</u> test program
+		<ul>
+		    <li><b>record addition</b>: use the command line to indicate a file of records to add</br>
+			<ol>
+			    <li>When a block is split, log the event.</li>
+			    <li>Optionally, also run the two dumps.</li>
+			    <li>If the index has to be modified, log the event.</li>
+			    <li>Optionally, run a dump of the index</li>
+			</ol>
+		    </li>
+		    <li><b>record deletion</b>: use the command line to indicate a file of keys for records to delete</br>
+			<ol>
+			    <li>When two blocks are merged, or participants of a redistribution, log the event.</li>
+			    <li>Optionally, also run the two dumps.</li>
+			    <li>If the index has to be modified, log the event.</li>
+			    <li>Optionally, run a dump of the index</li>
+			</ol>
+		    </li>
+		</ul>
+	    </li>
+	</ol>
+    </ul>
+    <li>All program variables and values that can vary should be initialized either by command line parameters (or their defaults) or meta-data in the the data file or index (e.g. header record info.)</li>
+    <li>Document (<i>extensively</i>) your C++ source code with comments and Doxygen tags.</li>
+    <li>Create a Doxygen PDF of your class and application program code.</li>
+    <li>Create a user guide showing how to use your program (including how to use the command line options, and how the output should appear)</li>
+</ol>
+<hr>
+<h3>Header Record Architecture:</h3>
+<ul>
+    <li>file structure type {blocked sequence set with comma separated fields, and length-indicated records}</li>
+    <li>version of your file structure type (we may add features in subsequent versions)</li>
+    <li>header record size</li>
+    <li>number of bytes for each record size integer (if fixed-size)</li>
+    <li>size format type {ASCII or binary}</li>
+    <li>block size {default to (512 Bytes / block)}</li>
+    <li>minimum block capacity {default to 50%}, except for, possibly, the last block</li>
+    <li>index file name
+    <li>index file schema information {how to read the index file format}</li>
+    <li>record count</i>
+    <li>block count</i>
+    <li>count of fields per record</li>
+    <li>for each field:</li>
+    <ul>
+	<li>name or ID</li>
+	<li>type schema </li>
+	<ul>
+	    <li>(<i><u>format</u> to read or write</i>)</li>
+	</ul>
+    </ul>
+    <li>indicate (ordinally) which field serves as the primary key</li>
+    <li>RBN <u>link</u> to the block avail-list {RBN &harr; Relative Block Number}</li>
+    <li>RBN <u>link</u> to the active sequence set list</li>
+    <li>stale flag</li>
+</ul>
+<h3>Block Architecture:</h3>
+Each active block should include the following components:
+<ul>
+    <li>count of records ( &gt; 0 )</li>
+    <li>links to preceding &amp; succeeding active blocks</li>
+    <li>set of records ordered by key</li>
+</ul>
+Each <i>avail</i> list block should include the following components:
+<ul>
+    <li>count of records ( == 0 )</li>
+    <li>link to succeeding avail block</li>
+    <li><i>all other bytes should be overwritten with blanks</i>
+</ul>
+<hr>
+<h2>WHAT TO TURN IN:</h2>
+<h4>Prior to coding:</h4>
+	<ul>
+	    <li>the (<i>preliminary</i>) design document </li>
+	    <li>the (<i>preliminary</i>) test document </li>
+	</ul>
+<h4>Final version:</h4>
+	<ul>
+	    <li>the user guide (<code>.txt</code>)</li>
+	    <li>the <i>length-indicated</i> data files files (<code>.txt</code>)</li>
+	    <li>the simple index file (<code>.txt</code>)</li>
+	    <li>the Doxygen PDF</li>
+	    <li>the <code>.cpp</code> and <code>.h</code> source code files 
+	    <li>the script file that was generated to demonstrate the running of the application program.</li>
+	    <li>the (<i>final</i>) <u>design document</u> </li>
+	    <li>the (<i>final</i>) <u>test document</u> demonstrating the operation of all of your programs (and classes)
+	    <ul>
+		<li>generate and use small (<i>minimum useful size</i>) data files to demonstrate adding and deleting records to the blocked sequence set and its simple index.</br>
+		    (consider testing with both the default block size and a block size that has a capacity of approximately six records)
+		    Show:</li>
+		<ul>
+		    <li>the adding of a record requiring no block split</li>
+		    <li>the adding of a record requiring a block split, and use and updating of the avail list</li>
+		    <li>the deletion of a record requiring no block deletion or redistribution</li>
+		    <li>the deletion of a record requiring a block redistribution with no merge</li>
+		    <li>the deletion of a record requiring a block merge with the logically rightmost block cleared and added to the avail list </li>
+		</ul>
+	    </ul>
+	</ul>
+	(zip the <code>.cpp</code> source files: {see <a href="https://support.microsoft.com/en-us/help/14200/windows-compress-uncompress-zip-files">https://support.microsoft.com/en-us/help/14200/windows-compress-uncompress-zip-files</a>})<br>
+
+
+
+</div>
+
+</body>
+
+</html>
