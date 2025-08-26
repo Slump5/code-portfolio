@@ -1,0 +1,72 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 3/30/2024 3:36:48 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      : Linked List Insertion Program Lab 5
+00000000                             3  * Written by : Thomas Hoerger
+00000000                             4  * Date       : 3/30/2024
+00000000                             5  * Description: This program inserts a new element into a linked list.
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  
+00001000                             9  START: 
+00001000                            10      ; Initialize memory for e1
+00001000  203C 00001062             11      MOVE.L  #data1,D0     ; Load data for e1 into D0
+00001006  21C0 74A8                 12      MOVE.L  D0,$0074A8    ; Store data for e1 at address $0074A8
+0000100A  203C 00001076             13      MOVE.L  #e2,D0        ; Load address of e2 into D0
+00001010  21C0 74AC                 14      MOVE.L  D0,$0074AC    ; Store address of e2 (next pointer of e1) at address $0074AC
+00001014                            15  
+00001014                            16      ; Initialize memory for e2
+00001014  203C 00001066             17      MOVE.L  #data2,D0     ; Load data for e2 into D0
+0000101A  21C0 74D0                 18      MOVE.L  D0,$0074D0    ; Store data for e2 at address $0074D0
+0000101E  203C 0000107A             19      MOVE.L  #e3,D0        ; Load address of e3 into D0
+00001024  21C0 74D4                 20      MOVE.L  D0,$0074D4    ; Store address of e3 (next pointer of e2) at address $0074D4
+00001028                            21  
+00001028                            22      ; Initialize memory for e3
+00001028  203C 0000106A             23      MOVE.L  #data3,D0     ; Load data for e3 into D0
+0000102E  21C0 74B8                 24      MOVE.L  D0,$0074B8    ; Store data for e3 at address $0074B8
+00001032  203C 0000107E             25      MOVE.L  #e4,D0        ; Load address of e4 into D0
+00001038  21C0 74BC                 26      MOVE.L  D0,$0074BC    ; Store address of e4 (next pointer of e3) at address $0074BC
+0000103C                            27  
+0000103C                            28      ; Initialize memory for the new element
+0000103C  203C 00001072             29      MOVE.L  #data_new,D0  ; Load data for the new element into D0
+00001042  21C0 74B0                 30      MOVE.L  D0,$0074B0    ; Store data for the new element at address $0074B0
+00001046  203C 0000107A             31      MOVE.L  #e3,D0        ; Load address of e3 into D0
+0000104C  21C0 74B4                 32      MOVE.L  D0,4+$0074B0 ; Store address of e3 (next pointer of the new element) at offset 4 from $0074B0
+00001050                            33  
+00001050                            34      ; Update the next pointer of e2 to point to the new element
+00001050  203C 00001076             35      MOVE.L  #e2,D0        ; Load address of e2 into D0
+00001056  2238 74B0                 36      MOVE.L  $0074B0,D1    ; Load address of the new element into D1
+0000105A  2141 0004                 37      MOVE.L  D1,4(A0)      ; Store address of the new element (next pointer of e2) at offset 4 from e2
+0000105E                            38  
+0000105E  FFFF FFFF                 39      SIMHALT               ; halt simulator
+00001062                            40  
+00001062                            41  * Put variables and constants here
+00001062= 0277EDFD                  42  data1:    DC.L   41414141   ; data for e1
+00001066= 028757B2                  43  data2:    DC.L   42424242   ; data for e2
+0000106A= 0296C167                  44  data3:    DC.L   43434343   ; data for e3
+0000106E= 02A62B1C                  45  data4:    DC.L   44444444   ; data for e4
+00001072= 02B594D1                  46  data_new: DC.L   45454545   ; data for the new element
+00001076= 000074D0                  47  e2:       DC.L   $0074D0    ; address of e2
+0000107A= 000074B8                  48  e3:       DC.L   $0074B8    ; address of e3
+0000107E= 000074C0                  49  e4:       DC.L   $0074C0    ; address of e4
+00001082                            50  
+00001082                            51      END    START               ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+DATA1               1062
+DATA2               1066
+DATA3               106A
+DATA4               106E
+DATA_NEW            1072
+E2                  1076
+E3                  107A
+E4                  107E
+START               1000
