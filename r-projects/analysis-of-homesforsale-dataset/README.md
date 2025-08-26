@@ -16,7 +16,6 @@ This project analyzes the "HomesForSale" dataset to investigate the influence of
 - **homesforsale-dataset-thomashoerger.Rmd:** R Markdown source file containing the analysis code, visualizations, and report narrative.
 - **homesforsale.csv:** Input CSV dataset with home listings (State, Price, Size, Beds, Baths).
 - **homesforsale-dataset-thomashoerger.html:** Rendered HTML report generated from the R Markdown file.
-- **.Rhistory:** R session history file with commands related to data processing and analysis (includes unrelated SleepStudy.csv commands).
 
 ## Requirements
 - **R Environment:** R (version 4.0 or later recommended).
@@ -75,4 +74,5 @@ This project analyzes the "HomesForSale" dataset to investigate the influence of
 - Create a PDF version of the report using LaTeX for broader compatibility.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 HomesForSale Data Analysis".
