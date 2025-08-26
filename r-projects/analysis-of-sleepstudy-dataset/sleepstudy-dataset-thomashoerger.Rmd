@@ -1,0 +1,453 @@
+---
+title: "Sleep Habits, Academic Outcomes, and Well-Being Among College Students"
+author: "Thomas Hoerger"
+date: "4/15/2025"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    toc_depth: 2
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+# Load the original CSV file with original column names
+sleep_data <- read.csv("SleepStudy.csv")
+
+
+```
+
+## Introduction
+
+This report presents an analysis of sleep patterns among college students, utilizing the **SleepStudy** dataset obtained from [https://www.lock5stat.com/datapage3e.html](https://www.lock5stat.com/datapage3e.html). The dataset comprises 253 observations on 27 variables, providing valuable insights into the sleep habits, psychological well-being, and lifestyle choices of college students.
+
+The primary objective of this analysis is to examine the relationships between sleep behaviors and academic performance, as well as psychological and lifestyle variables among college students. By addressing these relationships, we aim to uncover patterns that could inform interventions to improve student well-being and academic success.
+
+The following research questions will be addressed:
+
+1. Is there a significant difference in the average GPA between male and female college students?
+2. Is there a significant difference in the average number of early classes between the first two class years and other class years?
+3. Do students who identify as "larks" have significantly better cognitive skills (CognitionZscore) compared to "owls"?
+4. Is there a significant difference in the average number of classes missed between students who had at least one early class and those who didn't?
+5. Is there a significant difference in the average happiness level between students with at least moderate depression and those with normal depression status?
+6. Is there a significant difference in sleep quality scores between students who reported having at least one all-nighter and those who didn't?
+7. Do students who abstain from alcohol use have significantly better stress scores than those who report heavy alcohol use?
+8. Is there a significant difference in the average number of drinks per week between students of different genders?
+9. Is there a significant difference in the average weekday bedtime between students with high and low stress?
+10. Is there a significant difference in the average hours of sleep on weekends between first two year students and other students?
+
+By exploring these questions, this report aims to contribute valuable insights into the factors that influence college student sleep patterns and their broader impact.
+
+## Data
+
+The SleepStudy dataset contains 253 observations and 27 variables. These include:
+
+- **Demographics**: Gender, ClassYear
+- **Academic performance**: GPA, ClassesMissed
+- **Sleep behavior**: WeekdayBed, WeekendSleep, NumEarlyClass, AllNighter
+- **Psychological well-being**: DepressionScore, AnxietyScore, StressScore, DepressionStatus
+- **Lifestyle variables**: AlcoholUse, Drinks per week, LarkOwl chronotype
+
+```{r}
+# Preview the structure
+glimpse(sleep_data)
+
+
+```
+
+Data were collected via surveys from college students, designed to assess the relationships between lifestyle, sleep, mental health, and academic performance.
+
+## Analysis
+
+### RQ1: GPA by Gender
+
+This research question investigates whether there is a significant difference in the average GPA between male and female college students. Gender was coded as a categorical variable, and a two-sample t-test was used to compare the mean GPA across gender groups.
+
+```{r}
+# Make sure Gender is a factor
+sleep_data$Gender <- as.factor(sleep_data$Gender)
+
+# Boxplot
+ggplot(sleep_data, aes(x = Gender, y = GPA, fill = Gender)) +
+  geom_boxplot() +
+  labs(title = "GPA by Gender", x = "Gender", y = "GPA")
+
+```
+
+Conclusion: A two-sample t-test revealed a statistically significant difference in GPA between male and female students (t = 3.91, df = 200.9, p = 0.0001).
+
+Mean GPA (Male): 3.32
+
+Mean GPA (Female): 3.12
+
+95% Confidence Interval for the difference: [0.10, 0.30]
+
+This result suggests that male students had a significantly higher average GPA than female students in this sample.
+
+### RQ2: Number of Early Classes by Class Year Group
+
+This research question investigates whether underclassmen (FirstYear and Sophomore students) have a significantly different number of early classes compared to upperclassmen (Junior and Senior students). Students were grouped into two categories: **EarlyYears** (FirstYear and Sophomore) and **Other** (Junior and Senior). A two-sample t-test was used to compare the average number of early classes between these two groups.
+
+```{r}
+# Re-import the original dataset (optional but safe)
+sleep_data <- read.csv("SleepStudy.csv")
+
+# Recode ClassYear from 1-4 to labels
+sleep_data$ClassYear <- factor(sleep_data$ClassYear,
+                               levels = c(1, 2, 3, 4),
+                               labels = c("FirstYear", "Sophomore", "Junior", "Senior"))
+
+# Create ClassGroup
+sleep_data$ClassGroup <- ifelse(sleep_data$ClassYear %in% c("FirstYear", "Sophomore"),
+                                "EarlyYears", "Other")
+
+# Filter only rows with valid NumEarlyClass and ClassGroup
+rq2_data <- sleep_data %>%
+  filter(!is.na(NumEarlyClass),
+         ClassGroup %in% c("EarlyYears", "Other")) %>%
+  mutate(ClassGroup = factor(ClassGroup)) %>%
+  droplevels()
+
+
+# Boxplot
+ggplot(rq2_data, aes(x = ClassGroup, y = NumEarlyClass, fill = ClassGroup)) +
+  geom_boxplot() +
+  labs(title = "Number of Early Classes by Class Year Group",
+       x = "Class Group", y = "Number of Early Classes")
+
+```
+
+Conclusion: A Welch two-sample t-test showed a statistically significant difference in the number of early classes between underclassmen and upperclassmen (t = 4.18, df = 250.7, p < 0.001).
+
+Mean (EarlyYears): 2.07 early classes
+
+Mean (Other): 1.31 early classes
+
+95% Confidence Interval for the difference: [0.40, 1.12]
+
+This suggests that students in their first two years of college tend to take significantly more early classes than upperclassmen.
+
+### RQ3: CognitionZscore by Lark/Owl Type
+
+This research question explores whether students who identify as “larks” have significantly better cognitive skills, measured by their Cognition Z-Score, compared to those who identify as “owls.” Students who selected “Neither” were excluded, and a two-sample t-test was used to compare the average cognition scores between the two chronotype groups.
+
+```{r}
+# Filter out "Neither" and keep only Lark and Owl
+lark_owl_data <- sleep_data %>%
+  filter(LarkOwl %in% c("Lark", "Owl")) %>%
+  mutate(LarkOwl = factor(LarkOwl, levels = c("Lark", "Owl")))
+
+# Boxplot
+ggplot(lark_owl_data, aes(x = LarkOwl, y = CognitionZscore, fill = LarkOwl)) +
+  geom_boxplot() +
+  labs(title = "Cognition Z-Score by Chronotype (Lark vs Owl)",
+       x = "Chronotype", y = "Cognition Z-Score")
+
+```
+
+Conclusion: A Welch two-sample t-test found no statistically significant difference in cognition z-scores between larks and owls (t = 0.81, df = 75.33, p = 0.423).
+
+Mean (Lark): 0.09
+
+Mean (Owl): -0.04
+
+95% Confidence Interval for the difference: [-0.19, 0.45]
+
+These results suggest that chronotype (being a lark or an owl) does not significantly impact cognitive performance in this sample.
+
+### RQ4: Classes Missed by EarlyClass Status
+
+This research question examines whether students who have at least one early class (EarlyClass = 1) tend to miss more classes on average than those who do not (EarlyClass = 0). A two-sample t-test was used to compare the number of classes missed across the two groups.
+
+```{r}
+# Ensure EarlyClass is a factor
+sleep_data$EarlyClass <- as.factor(sleep_data$EarlyClass)
+
+# Boxplot
+ggplot(sleep_data, aes(x = EarlyClass, y = ClassesMissed, fill = EarlyClass)) +
+  geom_boxplot() +
+  labs(title = "Classes Missed by Early Class Attendance",
+       x = "Had Early Class", y = "Classes Missed")
+
+```
+
+Conclusion: A Welch two-sample t-test showed no statistically significant difference in the number of classes missed between students who had at least one early class and those who did not (t = 1.48, df = 152.78, p = 0.142).
+
+Mean (No Early Class): 2.65 missed classes
+
+Mean (Early Class): 1.99 missed classes
+
+95% Confidence Interval for the difference: [-0.22, 1.54]
+
+Although students without early classes missed slightly more classes on average, this difference was not statistically significant.
+
+### RQ5: Happiness by Depression Status
+
+This research question investigates whether students with moderate to severe depression experience lower happiness levels than those with normal depression status. DepressionStatus was grouped into two categories: “Normal” and “Moderate/Severe.” A two-sample t-test was used to compare the happiness scores between the two groups.
+
+```{r}
+# Create grouped depression status variable
+sleep_data$DepGroup <- ifelse(sleep_data$DepressionStatus %in% c("moderate", "severe"),
+                              "Moderate/Severe", "Normal")
+
+sleep_data$DepGroup <- as.factor(sleep_data$DepGroup)
+
+# Boxplot
+ggplot(sleep_data, aes(x = DepGroup, y = Happiness, fill = DepGroup)) +
+  geom_boxplot() +
+  labs(title = "Happiness by Depression Group",
+       x = "Depression Group", y = "Happiness Score")
+
+```
+
+Conclusion: A Welch two-sample t-test revealed a statistically significant difference in happiness levels between students with moderate/severe depression and those with normal depression status (t = -5.63, df = 55.59, p < 0.001).
+
+Mean (Moderate/Severe): 21.61
+
+Mean (Normal): 27.06
+
+95% Confidence Interval for the difference: [-7.38, -3.51]
+
+Students with moderate or severe depression reported significantly lower happiness scores than their peers, suggesting a strong association between depression and subjective well-being.
+
+### RQ6: Sleep Quality by All-Nighter
+
+This research question tests whether students who reported pulling at least one all-nighter differ significantly in sleep quality compared to students who did not. Sleep quality is measured using the PoorSleepQuality variable, with lower values indicating better sleep. A two-sample t-test was used for the comparison.
+
+```{r}
+# Ensure AllNighter is a factor
+sleep_data$AllNighter <- as.factor(sleep_data$AllNighter)
+
+# Boxplot
+ggplot(sleep_data, aes(x = AllNighter, y = PoorSleepQuality, fill = AllNighter)) +
+  geom_boxplot() +
+  labs(title = "Sleep Quality by All-Nighter Status",
+       x = "Pulled All-Nighter", y = "Poor Sleep Quality Score")
+
+
+```
+
+Conclusion: A Welch two-sample t-test showed no statistically significant difference in sleep quality between students who pulled an all-nighter and those who did not (t = -1.71, df = 44.71, p = 0.095).
+
+Mean (No All-Nighter): 6.14
+
+Mean (All-Nighter): 7.03
+
+95% Confidence Interval for the difference: [-1.95, 0.16]
+
+Although students who pulled an all-nighter had slightly worse sleep quality on average, the difference was not statistically significant at the 0.05 level. The result, however, may suggest a trend worth further exploration.
+
+### RQ7: Stress Score by Alcohol Use
+
+This research question evaluates whether stress levels differ between students who abstain from alcohol use and those who report heavy alcohol use. The analysis includes only students in the "Abstain" and "Heavy" categories of AlcoholUse, and compares their average StressScore using a two-sample t-test.
+
+```{r}
+# Filter and label only Abstain and Heavy groups
+alcohol_subset <- sleep_data %>% filter(AlcoholUse %in% c("Abstain", "Heavy"))
+alcohol_subset$AlcoholUse <- factor(alcohol_subset$AlcoholUse)
+
+# Boxplot
+ggplot(alcohol_subset, aes(x = AlcoholUse, y = StressScore, fill = AlcoholUse)) +
+  geom_boxplot() +
+  labs(title = "Stress Score by Alcohol Use Type",
+       x = "Alcohol Use", y = "Stress Score")
+
+```
+
+Conclusion: A Welch two-sample t-test found no statistically significant difference in stress levels between students who abstain from alcohol and those who report heavy alcohol use (t = -0.63, df = 28.73, p = 0.536).
+
+Mean (Abstain): 8.97
+
+Mean (Heavy): 10.44
+
+95% Confidence Interval for the difference: [-6.26, 3.33]
+
+Although heavy drinkers had slightly higher stress scores on average, the difference was not statistically significant in this sample.
+
+### RQ8: Drinks Per Week by Gender
+
+This research question investigates whether the average number of alcoholic drinks consumed per week differs between male and female students. A two-sample t-test was used to compare the Drinks variable across gender groups.
+
+```{r}
+# Make sure Gender is properly labeled
+sleep_data$Gender <- factor(sleep_data$Gender,
+                            levels = c(0, 1),
+                            labels = c("Male", "Female"))
+
+# Boxplot
+ggplot(sleep_data, aes(x = Gender, y = Drinks, fill = Gender)) +
+  geom_boxplot() +
+  labs(title = "Drinks per Week by Gender",
+       x = "Gender", y = "Drinks per Week")
+
+
+```
+
+Conclusion: A Welch two-sample t-test revealed a statistically significant difference in weekly alcohol consumption between male and female students (t = -6.16, df = 142.75, p < 0.001).
+
+Mean (Male): 4.24 drinks/week
+
+Mean (Female): 7.54 drinks/week
+
+95% Confidence Interval for the difference: [-4.36, -2.24]
+
+Contrary to common assumptions, female students in this sample reported consuming significantly more alcoholic drinks per week than male students.
+
+### RQ9: Weekday Bedtime by Stress Level
+
+This research question examines whether students who report high stress levels go to bed later on weekdays compared to students who report normal stress. Weekday bedtime is compared between the two groups using a two-sample t-test.
+
+```{r}
+# Ensure Stress is properly labeled
+sleep_data$Stress <- factor(sleep_data$Stress,
+                            levels = c("normal", "high"),
+                            labels = c("Normal", "High"))
+
+# Boxplot
+ggplot(sleep_data, aes(x = Stress, y = WeekdayBed, fill = Stress)) +
+  geom_boxplot() +
+  labs(title = "Weekday Bedtime by Stress Level",
+       x = "Stress Level", y = "Weekday Bedtime (military hour)")
+
+```
+
+Conclusion: A Welch two-sample t-test showed no statistically significant difference in weekday bedtime between students with high and normal stress levels (t = 1.07, df = 87.05, p = 0.286).
+
+Mean (Normal Stress): 24.89 (approximately 12:53 AM)
+
+Mean (High Stress): 24.72 (approximately 12:43 AM)
+
+95% Confidence Interval for the difference: [-0.14, 0.49]
+
+Although students with high stress went to bed slightly earlier on average, this difference was not statistically significant.
+
+### RQ10: Weekend Sleep by Class Year Group
+
+This research question tests whether students in the first two class years (FirstYear and Sophomore) sleep more on weekends compared to students in upper class years (Junior and Senior). Weekend sleep hours are compared using a two-sample t-test between the EarlyYears and Other class groups.
+
+```{r}
+# Reuse ClassGroup
+# Boxplot
+ggplot(sleep_data, aes(x = ClassGroup, y = WeekendSleep, fill = ClassGroup)) +
+  geom_boxplot() +
+  labs(title = "Weekend Sleep by Class Year Group",
+       x = "Class Group", y = "Weekend Sleep (hours)")
+
+```
+
+Conclusion: A Welch two-sample t-test found no statistically significant difference in weekend sleep hours between underclassmen and upperclassmen (t = -0.05, df = 237.36, p = 0.962).
+
+Mean (EarlyYears): 8.21 hours
+
+Mean (Other): 8.22 hours
+
+95% Confidence Interval for the difference: [-0.35, 0.33]
+
+The data suggest that class year does not influence how much students sleep on weekends.
+
+## Summary
+
+This report explored ten research questions focused on the sleep patterns, lifestyle choices, and academic performance of college students using the SleepStudy dataset.
+
+Key findings from the analysis include:
+
+- **RQ1:** Male students had significantly higher GPAs than female students.
+- **RQ2:** Underclassmen (FirstYear and Sophomore) took significantly more early classes than upperclassmen (Junior and Senior).
+- **RQ3:** There was no significant difference in cognition scores between students who identified as “larks” and those who identified as “owls.”
+- **RQ4:** There was no significant difference in the number of classes missed between students with and without early classes.
+- **RQ5:** Students with moderate or severe depression reported significantly lower happiness scores than students with normal depression status.
+- **RQ6:** Although students who pulled all-nighters reported slightly worse sleep quality, the difference was not statistically significant.
+- **RQ7:** There was no significant difference in stress scores between students who abstain from alcohol and those who report heavy alcohol use.
+- **RQ8:** Female students reported significantly more alcoholic drinks per week than male students.
+- **RQ9:** Stress level was not significantly associated with weekday bedtime.
+- **RQ10:** There was no significant difference in weekend sleep duration between underclassmen and upperclassmen.
+
+### Implications
+
+These findings suggest that while some lifestyle factors—such as class year and depression status—are significantly associated with academic or mental health outcomes, others (like alcohol use and sleep patterns) showed weaker or non-significant associations. Notably, the strong link between depression and happiness, and between early class scheduling and class year, highlight areas that may warrant further exploration or support interventions for students.
+
+### Overall Conclusion
+
+The SleepStudy dataset provides valuable insight into the behaviors and well-being of college students. Although not all relationships were statistically significant, this analysis helps identify which factors are most strongly associated with academic performance and mental health, contributing to a better understanding of student success and well-being.
+
+Thomas Hoerger - Copyright © 2025 Sleep Study Dataset Analysis
+
+## References
+
+- Lock5Stat Dataset. (n.d.). Retrieved from [https://www.lock5stat.com/datapage3e.html](https://www.lock5stat.com/datapage3e.html)
+- Lock, R., Lock, P. F., Lock-Morgan, K., Lock, E. F., & Lock, D. F. (2020). *Statistics: Unlocking the Power of Data* (3rd ed.). Wiley.
+
+## Appendix: Full R Code for T-Tests
+
+```{r}
+
+# Make sure ClassYear is labeled first (required for RQ2 & RQ10)
+sleep_data$ClassYear <- factor(sleep_data$ClassYear,
+                               levels = c(1, 2, 3, 4),
+                               labels = c("FirstYear", "Sophomore", "Junior", "Senior"))
+
+
+# RQ1: GPA by Gender
+t.test(GPA ~ Gender, data = sleep_data)
+
+# RQ2: Early Classes by Class Year Group
+
+# Re-import the original dataset (optional but safe)
+sleep_data <- read.csv("SleepStudy.csv")
+
+# Recode ClassYear from 1-4 to labels
+sleep_data$ClassYear <- factor(sleep_data$ClassYear,
+                               levels = c(1, 2, 3, 4),
+                               labels = c("FirstYear", "Sophomore", "Junior", "Senior"))
+
+# Create ClassGroup
+sleep_data$ClassGroup <- ifelse(sleep_data$ClassYear %in% c("FirstYear", "Sophomore"),
+                                "EarlyYears", "Other")
+
+# Filter only rows with valid NumEarlyClass and ClassGroup
+rq2_data <- sleep_data %>%
+  filter(!is.na(NumEarlyClass),
+         ClassGroup %in% c("EarlyYears", "Other")) %>%
+  mutate(ClassGroup = factor(ClassGroup)) %>%
+  droplevels()
+
+# Run the t-test
+t.test(NumEarlyClass ~ ClassGroup, data = rq2_data)
+
+# RQ3: Cognition Z-Score by Chronotype (Lark vs Owl)
+lark_owl_data <- sleep_data %>%
+  filter(LarkOwl %in% c("Lark", "Owl")) %>%
+  mutate(LarkOwl = factor(LarkOwl, levels = c("Lark", "Owl")))
+t.test(CognitionZscore ~ LarkOwl, data = lark_owl_data)
+
+# RQ4: Classes Missed by Early Class Attendance
+t.test(ClassesMissed ~ EarlyClass, data = sleep_data)
+
+# RQ5: Happiness by Depression Status
+sleep_data$DepGroup <- ifelse(sleep_data$DepressionStatus %in% c("moderate", "severe"),
+                              "Moderate/Severe", "Normal")
+sleep_data$DepGroup <- factor(sleep_data$DepGroup)
+t.test(Happiness ~ DepGroup, data = sleep_data)
+
+# RQ6: Sleep Quality by All-Nighter
+t.test(PoorSleepQuality ~ AllNighter, data = sleep_data)
+
+# RQ7: Stress Score by Alcohol Use (Abstain vs Heavy)
+alcohol_subset <- sleep_data %>%
+  filter(AlcoholUse %in% c("Abstain", "Heavy")) %>%
+  mutate(AlcoholUse = factor(AlcoholUse))
+t.test(StressScore ~ AlcoholUse, data = alcohol_subset)
+
+# RQ8: Drinks per Week by Gender
+t.test(Drinks ~ Gender, data = sleep_data)
+
+# RQ9: Weekday Bedtime by Stress Level
+t.test(WeekdayBed ~ Stress, data = sleep_data)
+
+# RQ10: Weekend Sleep by Class Group
+t.test(WeekendSleep ~ ClassGroup, data = sleep_data)
+
+```

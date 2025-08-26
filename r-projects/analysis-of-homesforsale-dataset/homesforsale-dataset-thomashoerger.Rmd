@@ -1,0 +1,215 @@
+---
+title: "Home Price Analysis: The Influence of Size, Bedrooms, Bathrooms, and Location"
+author: "Thomas Hoerger"
+date: "4/29/2025"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+# Load the original CSV file with original column names
+homes_data <- read.csv("HomesForSale.csv")
+
+
+```
+
+## Introduction
+
+This report explores the relationships between home characteristics and sale prices in the "HomesForSale" data set. The analysis focuses primarily on California but also compares home prices across four states (California, New York, New Jersey, and Pennsylvania). We use linear regression to analyze how size, number of bedrooms, and number of bathrooms affect home prices individually and jointly. Additionally, we use ANOVA to assess price differences across states. The goal is to understand which features are most influential in determining home prices.
+
+The following research questions will be addressed:
+
+1. Use the data only for California. How much does the size of a home influence its price?
+
+2. Use the data only for California. How does the number of bedrooms of a home influence its price?
+
+3. Use the data only for California. How does the number of bathrooms of a home influence its price?
+
+4. Use the data only for California. How do the size,  the number of bedrooms, and  the number of bathrooms of a home jointly influence its price?
+
+5. Are there significant differences in home prices among the four states (CA, NY, NJ, PA)? This will help you determine if the state in which a home is located has a significant impact on its price. All data should be used.
+
+## Data
+
+The data was retrieved from the Lock5Stat textbook resource:
+
+It includes home listings across various U.S. states with the following variables:
+
+Price: Sale price of the home (in USD)
+
+Size: Size of the home (in square feet)
+
+Bedrooms: Number of bedrooms
+
+Bathrooms: Number of bathrooms
+
+State: State where the home is located
+
+I filtered the data for California homes when needed, and used the full dataset for comparing states.
+
+```{r}
+# Preview the structure
+print(homes_data, row.names = FALSE)
+
+```
+## Analysis
+
+### RQ1: Using the California dataset. How much does the size of a home influence its price?
+
+```{r}
+# Filter for California homes only
+ca_home <- subset(homes_data, State == "CA")
+
+# Fit a linear regression model: Price ~ Size
+model1 <- lm(Price ~ Size, data = ca_home)
+
+# Scatterplot with regression line
+plot(ca_home$Size, ca_home$Price,
+     main = "Home Price vs Size in California",
+     xlab = "Size (sq ft)",
+     ylab = "Price ($)",
+     pch = 19, col = "darkgray")
+
+abline(model1, col = "blue", lwd = 2)
+
+```
+
+Conclusion: There is a statistically significant positive relationship between the size of a home and its price in California (p = 0.00046). The estimated slope of 0.339 indicates that for every additional square foot, the home price increases by approximately $339 on average. The model explains about 36% of the variation in home prices, suggesting that size is an important, but not the only, factor influencing price.
+
+### RQ2: Using that California dataset. How does the number of bedrooms of a home influence its price?
+
+```{r}
+# Fit a linear regression model: Price ~ Bedrooms
+model2 <- lm(Price ~ Beds, data = ca_home)
+
+# Scatterplot with regression line
+plot(ca_home$Beds, ca_home$Price,
+     main = "Home Price vs Number of Bedrooms in California",
+     xlab = "Number of Bedrooms",
+     ylab = "Price ($)",
+     pch = 19, col = "darkgray")
+
+abline(model2, col = "blue", lwd = 2)
+
+```
+
+Conclusion: There is no statistically significant relationship between the number of bedrooms and home price in California (p = 0.255). Although the model estimates that each additional bedroom adds about $84,770 to the price on average, this effect is not reliable, as indicated by the high p-value and low R-squared (only about 4.6% of the price variation is explained by number of bedrooms alone). This suggests that bedrooms alone are a weak predictor of price.
+
+### RQ3: Using the California dataset. How does the number of bathrooms of a home influence its price?
+
+```{r}
+# Fit a linear regression model: Price ~ Baths
+model3 <- lm(Price ~ Baths, data = ca_home)
+
+# Scatterplot with regression line
+plot(ca_home$Baths, ca_home$Price,
+     main = "Home Price vs Number of Bathrooms in California",
+     xlab = "Number of Bathrooms",
+     ylab = "Price ($)",
+     pch = 19, col = "darkgray")
+
+abline(model3, col = "blue", lwd = 2)
+```
+
+Conclusion: There is a statistically significant positive relationship between the number of bathrooms and home price in California (p = 0.0041). The regression model estimates that each additional bathroom increases the price by approximately $194,740 on average. With an R-squared of 25.9%, bathrooms explain a meaningful portion of price variability, making them a strong predictor of home value in the California housing market.
+
+### RQ4: Using the California dataset. How do the size,  the number of bedrooms, and  the number of bathrooms of a home jointly influence its price?
+
+```{r}
+# Fit a multiple regression model: Price ~ Size + Beds + Baths
+model4 <- lm(Price ~ Size + Beds + Baths, data = ca_home)
+
+# Plot 1: Fitted vs Actual Price
+plot(predict(model4), ca_home$Price,
+     main = "Actual vs Predicted Home Prices",
+     xlab = "Predicted Price",
+     ylab = "Actual Price",
+     pch = 19, col = "darkgray")
+abline(a = 0, b = 1, col = "blue", lwd = 2)
+
+# Plot 2: Residuals vs Fitted
+plot(predict(model4), residuals(model4),
+     main = "Residuals vs Predicted Prices",
+     xlab = "Predicted Price",
+     ylab = "Residuals",
+     pch = 19, col = "darkred")
+abline(h = 0, col = "blue", lwd = 2)
+```
+
+Conclusion: When considering size, bedrooms, and bathrooms together, only size has a statistically significant effect on home price in California (p = 0.026). The model estimates that each additional square foot increases the price by about $281 on average. The number of bedrooms and bathrooms do not have significant effects when controlling for size (p > 0.28). The model explains approximately 39% of the variation in home prices (Adjusted R² = 0.32), indicating a moderate combined influence of these home features, with size being the dominant predictor.
+
+### RQ5: Using full dataset. Are there significant differences in home prices among the four states (CA, NY, NJ, PA)? 
+
+```{r}
+# Filter the dataset to include only the four specified states
+four_states <- subset(homes_data, State %in% c("CA", "NY", "NJ", "PA"))
+
+# Run ANOVA: Price ~ State
+model5 <- aov(Price ~ State, data = four_states)
+
+# Box plot for visual comparison
+boxplot(Price ~ State, data = four_states,
+        main = "Home Prices by State",
+        ylab = "Price ($)",
+        col = "lightblue")
+
+```
+
+Conclusion: The ANOVA results show a highly significant difference in home prices among California, New York, New Jersey, and Pennsylvania (p = 0.00015). The F-statistic of 7.36 indicates that at least one state's average home price is significantly different from the others. This provides strong evidence that state location plays a critical role in determining home value. The boxplot supports this by showing clear variation in price distributions across the four states.
+
+## Summary
+
+This report investigated five research questions using the HomesForSale dataset, with a focus on how various home characteristics and location affect sale prices.
+
+Key findings from the analysis include:
+
+RQ1: There is a statistically significant positive relationship between home size and price in California; each additional square foot adds approximately $339 to the price.
+
+RQ2: The number of bedrooms is not a statistically significant predictor of price in California.
+
+RQ3: The number of bathrooms has a significant positive effect on price; each additional bathroom increases price by roughly $195,000.
+
+RQ4: When considering size, bedrooms, and bathrooms together, only size is a significant predictor of home price. Bedrooms and bathrooms do not show significant effects after accounting for size.
+
+RQ5: There are significant differences in home prices across the four states (CA, NY, NJ, PA), indicating that state location plays an important role in determining home value.
+
+### Implications
+
+These results suggest that physical size and location are the most influential factors in determining home price. While features like the number of bedrooms and bathrooms may affect a buyer's perception of value, they are not reliable price predictors when considered alongside size. The strong effect of location—shown by price differences across states—reinforces the importance of regional market dynamics. These findings may be useful for home buyers, sellers, and real estate professionals seeking to better understand pricing trends and make more informed decisions.
+
+### Overall Conclusion
+
+The HomesForSale dataset offers meaningful insight into the factors that influence residential property prices. While not all home features showed statistically significant relationships with price, this analysis highlights the importance of home size and location as primary drivers of value. These findings contribute to a better understanding of real estate pricing and can support more informed decision-making for buyers, sellers, and industry professionals alike.
+
+Thomas Hoerger - Copyright © 2025 HomesForSale Data Analysis
+
+## References
+
+Lock5Stat Dataset. (n.d.). Homes for Sale. Retrieved from https://www.lock5stat.com/datapage3e.html
+
+Lock, R., Lock, P. F., Lock-Morgan, K., Lock, E. F., & Lock, D. F. (2020). Statistics: Unlocking the Power of Data (3rd ed.). Wiley.
+
+## Appendix: Full R Summaries
+```{r}
+# RQ1: Using the California dataset. How much does the size of a home influence its price?
+summary(model1)
+
+# RQ2: Using that California dataset. How does the number of bedrooms of a home influence its price?
+summary(model2)
+
+# RQ3: Using the California dataset. How does the number of bathrooms of a home influence its price?
+summary(model3)
+
+# RQ4: Using the California dataset. How do the size,  the number of bedrooms, and  the number of bathrooms of a home jointly influence its price?
+summary(model4)
+
+# RQ5: Using full dataset. Are there significant differences in home prices among the four states (CA, NY, NJ, PA)? 
+summary(model5)
+
+```
