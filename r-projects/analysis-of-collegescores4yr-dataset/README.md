@@ -15,7 +15,6 @@ This is an R-based analysis project for processing and exploring the CollegeScor
 - **Documentation Support:** Inline comments in R code, R history file for session tracking, and a PDF with question selection process.
 
 ## File Structure
-- **.Rhistory:** R session history file capturing commands for data loading, cleaning, stats, and plotting.
 - **project-1-college-data-questions-thomashoeger.pdf:** PDF document outlining 10 simple questions, ChatGPT-generated questions, and final selected questions for analysis, with methods.
 - **analysis-of-collegescores4yr-dataset-thomashoeger.Rmd:** Main R Markdown file with introduction, methods, results (code chunks for stats and plots), and conclusion.
 - **collegescores4yr.csv:** Input CSV dataset with college metrics (Name, State, SAT, Tuition, Graduation Rate, etc.).
@@ -75,4 +74,5 @@ This is an R-based analysis project for processing and exploring the CollegeScor
 - Automate testing with testthat for stats and plots.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 Analysis of CollegeScores4yr Dataset".
