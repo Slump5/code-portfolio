@@ -1,3 +1,3 @@
-# Code Samples
+# Code Portfolio
 A collection of my programming work.
-Each folder contains a separate project with a short description.
+Each folder contains a separate project, and each project has its own README.md file with a brief description.
