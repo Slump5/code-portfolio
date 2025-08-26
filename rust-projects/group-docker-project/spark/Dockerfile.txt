@@ -1,0 +1,8 @@
+FROM bitnami/spark:latest
+
+# Copy your Spark app
+COPY app.py /app/app.py
+
+# Set the entrypoint to run Spark job
+ENTRYPOINT ["spark-submit", "/app/app.py"]
+

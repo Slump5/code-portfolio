@@ -1,0 +1,19 @@
+1. Documentation: describe in word or ppt file the steps taken in 
+your implementation; (1 point)
+2. Submission: upload on D2L, source code/scripting/setups 
+documentation and a not zipped short video demo ~3 
+minutes, and ppt presentation; as a comment in the source 
+code, include your name/author in the head of the program.
+
+Create the automated deployment of your distributed system:
+1) Install Dockers on your VPS; (1point)
+2) Define at least 3 containers: NGNIX, Spark, Rust (1point)
+3) Connectivity: your VPS use Delta Lake to access data bucket repository. (2points)
+4) Built communication among all your containers (2points)
+5) Build and run simple query from the client side that will require communication 
+between your containers(2points)
+6) Documentation: describe in word or ppt file the steps taken in your 
+implementation; Submission: upload on D2L, source code/scripting/setups 
+documentation and a not zipped short video demo 5 to 10 minutes, and ppt
+presentation; as a comment in the source code, include your name/author in the 
+head of the program (3 points)
