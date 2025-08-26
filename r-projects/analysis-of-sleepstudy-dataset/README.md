@@ -16,7 +16,6 @@ This is an R Markdown-based analysis of sleep habits, academic outcomes, and wel
 - **Dataset Insights:** Covers demographics, academics, sleep, psychology, and lifestyle; sourced from surveys for relational analysis.
 
 ## File Structure
-- **.Rhistory:** Log of R commands executed during development, including library loads, data reads, glimpses, plots, and t-tests.
 - **sleepstudy-dataset-thomashoerger.Rmd:** Main R Markdown source file with code chunks for setup, introduction, data preview, analysis per RQ, summary, and appendix.
 - **sleepstudy.csv:** Input CSV dataset with 253 rows and 27 columns (Gender, GPA, LarkOwl, PoorSleepQuality); truncated in upload but full in analysis.
 - **sleepstudy-dataset-thomashoerger.html:** Rendered HTML output from knitting the Rmd, including interactive TOC, plots, and t-test results.
@@ -81,4 +80,5 @@ This is an R Markdown-based analysis of sleep habits, academic outcomes, and wel
 - Expand to multi-dataset comparison or longitudinal analysis.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 Sleep Study Dataset Analysis".
