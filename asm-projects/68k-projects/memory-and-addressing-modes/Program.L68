@@ -1,0 +1,99 @@
+000000DA Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 2/10/2024 1:15:43 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      : Memory and Addressing
+00000000                             3  * Written by : Thomas Hoerger
+00000000                             4  * Date       : 2/10/2024
+00000000                             5  * Description: Thomas Hoerger - Copyright © 2024 Memory and Addressing Modes
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  * Initialize memory
+00001000  =00002518                  9  MEMORY_START EQU $2518
+00001000  =00002544                 10  MEMORY_END   EQU $2544
+00001000                            11      
+00001000= 1151                      12      DC.W 4433
+00001002= 1091                      13      DC.W 4241
+00001004= 0000                      14      DC.W 0000
+00001006= 0000                      15      DC.W 0000
+00001008= 09F9                      16      DC.W 2553
+0000100A= 0000                      17      DC.W 0000
+0000100C= 01EF                      18      DC.W $01EF
+0000100E= ABCD                      19      DC.W $ABCD
+00001010= 1564                      20      DC.W 5476
+00001012= CC22                      21      DC.W $CC22  
+00001014= FF34                      22      DC.W $FF34  
+00001016= 12FF                      23      DC.W $12FF  
+00001018= A267                      24      DC.W $A267  
+0000101A= 1FEE                      25      DC.W $1FEE  
+0000101C= FFFF                      26      DC.W $FFFF  
+0000101E= FFFF                      27      DC.W $FFFF  
+00001020= 0100                      28      DC.W $0100  
+00001022= 0000                      29      DC.W 0000
+00001024= ABCD                      30      DC.W $ABCD  
+00001026= FFFF                      31      DC.W $FFFF  
+00001028= 0000                      32      DC.W 0000
+0000102A= 0000                      33      DC.W 0000
+0000102C                            34  
+0000102C                            35  * Initialize registers    
+0000102C  =000000A3                 36  A3_START EQU $A3
+0000102C  =000000A4                 37  A4_START EQU $A4
+0000102C  =000000A6                 38  A6_START EQU $A6
+0000102C  =000000D3                 39  D3_START EQU $D3
+0000102C  =000000D5                 40  D5_START EQU $D5
+0000102C  =000000D6                 41  D6_START EQU $D6
+0000102C                            42  
+Line 43 WARNING: Origin value is odd (Location counter set to next highest address)
+000000A4                            43      ORG A3_START
+000000A4= 002468FA                  44  A3: DC.L $002468FA
+000000A4                            45      ORG A4_START
+000000A4= 00002544                  46  A4: DC.L $00002544
+000000A6                            47      ORG A6_START
+000000A6= 00002518                  48  A6: DC.L $00002518
+Line 49 WARNING: Origin value is odd (Location counter set to next highest address)
+000000D4                            49      ORG D3_START
+000000D4= 00000000                  50  D3: DC.L $00000000
+Line 51 WARNING: Origin value is odd (Location counter set to next highest address)
+000000D6                            51      ORG D5_START
+000000D6= FFFFFFFF                  52  D5: DC.L $FFFFFFFF
+000000D6                            53      ORG D6_START
+000000D6= 00000000                  54  D6: DC.L $00000000
+000000DA                            55      
+000000DA                            56  START: 
+000000DA  162E 0003                 57      MOVE.B 3(A6), D3        ; Instruction 1
+000000DE  3D6C 0004 0006            58      MOVE.W 4(A4), 6(A6)     ; Instruction 2
+000000E4  2A1E                      59      MOVE.L (A6)+, D5        ; Instruction 3
+000000E6  31DC 2522                 60      MOVE.W (A4)+, $002522   ; Instruction 4
+000000EA  1938 252E                 61      MOVE.B $00252E, -(A4)   ; Instruction 5
+000000EE  47F8 252A                 62      LEA.L $00252A, A3       ; Instruction 6
+000000F2  3C13                      63      MOVE.W (A3), D6         ; Instruction 7                 
+000000F4                            64  
+000000F4  FFFF FFFF                 65      SIMHALT             ; halt simulator
+000000F8                            66  
+000000F8                            67  
+000000F8                            68  
+000000F8                            69      END    START        ; last line of source
+
+No errors detected
+3 warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+A3                  A4
+A3_START            A3
+A4                  A4
+A4_START            A4
+A6                  A6
+A6_START            A6
+D3                  D4
+D3_START            D3
+D5                  D6
+D5_START            D5
+D6                  D6
+D6_START            D6
+MEMORY_END          2544
+MEMORY_START        2518
+START               DA
