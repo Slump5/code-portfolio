@@ -11,19 +11,16 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <limits>
 
 // Constructor: Initializes the game.
 // - Prompts user for draw mode (1 or 3 cards).
 // - Shuffles the deck and deals initial cards to tableau.
 // - Starts the game timer.
 Game::Game() : tableau(7), foundations(4) {
-    std::cout << "Play [1] one-card draw or [3] three-card draw? ";
-    std::cin >> drawMode;
-    if (drawMode != 3) drawMode = 1;  // Default to 1 if not 3
-    std::cin.ignore();  // Clear input buffer
-    deck.shuffle();     // Randomize deck order
-    deal();             // Distribute cards to tableau
-    startTime = std::chrono::steady_clock::now();  // Record start time for scoring
+    deck.shuffle();
+    deal();
+    startTime = std::chrono::steady_clock::now();
 }
 
 // deal: Sets up the initial tableau layout.
@@ -47,13 +44,15 @@ void Game::deal() {
 // - Shows stock (remaining cards) and waste pile (last drawn cards).
 // - Displays current score and undo count.
 void Game::display() {
-    #ifdef _WIN32
-        system("cls");  // Clear screen on Windows
-    #else
-      system("clear");  // Clear screen on Unix-like systems
-    #endif
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 
-    std::cout << "===== Solitaire Console Game =====\n";
+    std::cout << "===== Solitaire Console Game " 
+          << (drawMode == 1 ? "1-Card Draw" : "3-Card Draw") 
+          << " =====\n";
 
     // Calculate and display elapsed time
     auto now = std::chrono::steady_clock::now();
@@ -62,46 +61,57 @@ void Game::display() {
     int seconds = elapsed % 60;
     std::cout << "\nTime Elapsed: " << minutes << " min " << seconds << " sec\n";
 
-    // Foundations display
+    // Foundations
     std::cout << "\nFoundations:\n";
-    const char suits[4] = { 'H', 'D', 'C', 'S' };  // Suit symbols
+    const char suits[4] = { 'H', 'D', 'C', 'S' };
     for (int i = 0; i < 4; ++i) {
         std::cout << suits[i] << ": ";
         if (foundations[i].empty())
-            std::cout << "(empty)";  // No cards in foundation
+            std::cout << "(empty)";
         else
-            std::cout << foundations[i].back().toString();  // Top card
+            std::cout << foundations[i].back().toString();
         std::cout << "  ";
     }
 
-    // Tableau display
+    // Tableau
     std::cout << "\n\nTableau:\n";
     for (int i = 0; i < 7; ++i) {
         std::cout << "Pile " << i + 1 << ": ";
         for (const Card& c : tableau[i]) {
-            std::cout << c.toString() << " ";  // Print each card in pile
+            std::cout << c.toString() << " ";
         }
         std::cout << "\n";
     }
 
-    // Stock and Waste display
+    // Stock & Waste
     std::cout << "\nStock: " << deck.cardsRemaining() << " cards left\n";
     std::cout << "Waste: ";
-    for (auto it = waste.rbegin(); it != waste.rend(); ++it) {  // Show last drawn cards
-        std::cout << it->toString() << " ";
-        if (std::distance(waste.rbegin(), it) == drawMode - 1) break;  // Limit to draw mode
+    int visible = std::min((int)waste.size(), (drawMode == 1 ? 1 : 3));
+    for (int i = visible; i > 0; --i) {
+        std::cout << waste[waste.size() - i].toString() << " ";
     }
     std::cout << "\n";
 
-    // Score and Undo display
+    // Score and Commands
     std::cout << "\nScore: " << score << " | Undos: " << undoCount << "\n";
     std::cout << "\nCommands:\n"
-              << "d: Draw | q: Quit | u: Undo\n"
-              << "m <src> <dst>: Move from tableau src to dst\n"
-              << "w <dst>: Move waste to tableau dst\n"
-              << "f <src>: Move from tableau src to foundation\n"
-              << "wf: Move waste to foundation\n> ";
+              << "d: Draw cards\n"
+              << "m <src> <dst>: Move from tableau src to dst\n";
+
+    // ✅ Correct help text for draw modes
+    if (drawMode == 1) {
+        std::cout << "w <dst>: Move waste to tableau dst\n"
+                  << "wf: Move waste to foundation\n";
+    } else {
+        std::cout << "w <dst>: Move top waste card to tableau dst\n"
+                  << "wf: Move top waste card to foundation\n";
+    }
+
+    std::cout << "f <src>: Move from tableau src to foundation\n"
+              << "u: Undo (-15 points)\n"
+              << "q: Quit to Main Menu\n>";
 }
+
 
 // drawCard: Draws cards from deck to waste based on drawMode.
 // - If deck is empty, recycles waste back to deck (face-down).
@@ -119,7 +129,18 @@ void Game::drawCard() {
             waste.push_back(c);
         }
     }
-    score -= 10;  // Penalty for drawing (adjust as needed)
+
+    // Keep only top visible cards face-up (1 or 3)
+    int visible = (drawMode == 1 ? 1 : 3);
+    for (int i = 0; i < (int)waste.size() - visible; ++i) {
+        waste[i].faceUp = false;
+    }
+    // ✅ Ensure top visible cards are face-up
+    for (int i = std::max(0, (int)waste.size() - visible); i < (int)waste.size(); ++i) {
+        waste[i].faceUp = true;
+    }
+
+    score -= 0;  // Penalty for drawing (adjust as needed)
 }
 
 // moveCard: Moves a sequence of cards from one tableau pile to another.
@@ -164,26 +185,39 @@ void Game::moveCard(int src, int dst) {
     score += 10 * movable;  // Score bonus for move
 }
 
-// moveWasteToTableau: Moves top waste card to a tableau pile.
-// - Validates color alternation and value sequence.
+// ===== NEW HELPER FUNCTION =====
+int Game::getWasteCardIndex(int pos) {
+    if (waste.empty()) return -1;
+    int visible = (drawMode == 1 ? 1 : 3);
+    visible = std::min(visible, (int)waste.size());
+    if (pos < 1 || pos > visible) pos = visible;  // Default/top if invalid
+    return waste.size() - visible + (pos - 1);
+}
+
+// moveWasteToTableau: Moves selected waste card to a tableau pile.
+// - Allows selecting one of top 3 cards in 3-card mode.
 // - Saves state before moving.
-// - Updates score.
-void Game::moveWasteToTableau(int dst) {
+void Game::moveWasteToTableau(int dst, int pos) {
     if (waste.empty() || dst < 0 || dst >= 7) return;
 
-    Card top = waste.back();
+    // Always use top card only (real 3-card rules)
+    int idx = waste.size() - 1;
+    Card top = waste[idx];
     auto& dPile = tableau[dst];
 
     if (!dPile.empty()) {
         Card dstTop = dPile.back();
         if (isRed(top) == isRed(dstTop) || top.value != dstTop.value - 1) return;
-    } else if (top.value != 13) return;  // King to empty
+    } else if (top.value != 13) return;  // Only King on empty
 
     saveState();
     dPile.push_back(top);
     waste.pop_back();
-    score += 5;  // Bonus for waste to tableau
+    score += 5;
+
+    if (!waste.empty()) waste.back().faceUp = true;  // Reveal next waste
 }
+
 
 // moveToFoundation: Moves top card from tableau to matching foundation.
 // - Validates suit and ascending value.
@@ -207,14 +241,16 @@ void Game::moveToFoundation(int src) {
     score += 10;  // Bonus for to foundation
 }
 
-// moveWasteToFoundation: Moves top waste to matching foundation.
+// moveWasteToFoundation: Moves selected waste card to matching foundation.
 // - Similar validation as moveToFoundation.
 // - Saves state.
 // - Updates score.
-void Game::moveWasteToFoundation() {
+void Game::moveWasteToFoundation(int pos) {
     if (waste.empty()) return;
 
-    Card top = waste.back();
+    // Always use top card only (real 3-card rules)
+    int idx = waste.size() - 1;
+    Card top = waste[idx];
     int fIdx = top.suit;
     auto& f = foundations[fIdx];
 
@@ -225,7 +261,10 @@ void Game::moveWasteToFoundation() {
     f.push_back(top);
     waste.pop_back();
     score += 10;
+
+    if (!waste.empty()) waste.back().faceUp = true;  // Reveal next waste
 }
+
 
 // isRed: Helper to check if card is red (Hearts or Diamonds).
 bool Game::isRed(const Card& c) {
@@ -272,36 +311,58 @@ bool Game::checkWin() {
 void Game::play() {
     std::string input;
     while (true) {
-        display();  // Refresh screen
-        std::getline(std::cin, input);  // Read command
+        display();
+        std::getline(std::cin, input);
 
-        if (input == "q") break;  // Quit game
-        else if (input == "d") drawCard();  // Draw cards
-        else if (input == "u") undo();  // Undo last action
-        else if (input == "wf") moveWasteToFoundation();  // Waste to foundation
+        // Normalize input: trim trailing CR (from Windows) and whitespace
+        while (!input.empty() && isspace(static_cast<unsigned char>(input.back()))) input.pop_back();
+        while (!input.empty() && isspace(static_cast<unsigned char>(input.front()))) input.erase(input.begin());
+
+        // Skip empty input (e.g., user pressed Enter)
+        if (input.empty()) continue;
+
+        if (input == "q") {
+            break;  // Return to main menu
+        } else if (input == "d") drawCard();
+        else if (input == "u") undo();
+
+        // Waste → Foundation
+        else if (input == "wf") {
+            moveWasteToFoundation();
+        }
+
+        // Tableau → Foundation
+        else if (input[0] == 'f') {
+            int a;
+            if (sscanf(input.c_str(), "f %d", &a) == 1)
+                moveToFoundation(a - 1);
+        }
+
+        // Tableau → Tableau
         else if (input[0] == 'm') {
             int a, b;
             if (sscanf(input.c_str(), "m %d %d", &a, &b) == 2)
-                moveCard(a - 1, b - 1);  // Tableau move (0-indexed)
-        } else if (input[0] == 'w') {
-            int a;
-            if (sscanf(input.c_str(), "w %d", &a) == 1)
-                moveWasteToTableau(a - 1);  // Waste to tableau
-        } else if (input[0] == 'f') {
-            int a;
-            if (sscanf(input.c_str(), "f %d", &a) == 1)
-                moveToFoundation(a - 1);  // Tableau to foundation
+                moveCard(a - 1, b - 1);
         }
 
-        if (checkWin()) {  // Win condition met
+        // Waste → Tableau (ensure input has at least 2 chars before checking input[1])
+        else if (input.size() >= 2 && input[0] == 'w' && input[1] == ' ') {
+            int a;
+            if (sscanf(input.c_str(), "w %d", &a) == 1)
+                moveWasteToTableau(a - 1);
+        }
+
+        // Win check
+        if (checkWin()) {
             auto end = std::chrono::steady_clock::now();
             int seconds = std::chrono::duration_cast<std::chrono::seconds>(end - startTime).count();
-            int bonus = std::max(0, 500 - seconds);  // Time bonus
+            int bonus = std::max(0, 500 - seconds);
             score += bonus;
-            display();  // Show final state
+            display();
             std::cout << "\n🎉 You won! Final score: " << score
                       << " (+" << bonus << " time bonus, " << undoCount << " undos used)\n";
-            break;  // End game
+            break;
         }
     }
 }
+

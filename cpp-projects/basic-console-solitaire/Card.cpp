@@ -37,5 +37,14 @@ std::string Card::toString() const {
     else if (value == 13) valStr = "K";    // King
     else valStr = std::to_string(value);   // Numeric values 2-10
 
-    return valStr + suitToChar();  // Combine value and suit (e.g., "AH" for Ace of Hearts)
+    std::string suitStr = suitToChar();
+    std::string colorStart, colorEnd = "\033[0m";
+
+    // Red suits: Hearts, Diamonds | Blue suits: Clubs, Spades
+    if (suit == Hearts || suit == Diamonds)
+        colorStart = "\033[31m"; // Red
+    else
+        colorStart = "\033[34m"; // Blue
+
+    return colorStart + valStr + suitStr + colorEnd;
 }
