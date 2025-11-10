@@ -66,10 +66,10 @@ This is a console-based implementation of the classic Klondike Solitaire card ga
 - **Time Bonus:** On winning, a bonus of up to 500 points is awarded, reduced by the elapsed time in seconds.
 
 ## Future Improvements
-- Add color output for red/black suits using ANSI codes.
 - Implement a save/load game feature.
 - Add a scoring system for specific moves (tableau to foundation).
 - Support for additional Solitaire variants.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 Basic Console Solitaire".
