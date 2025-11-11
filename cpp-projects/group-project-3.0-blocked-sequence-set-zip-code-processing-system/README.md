@@ -55,17 +55,21 @@ Developer of `Block.h`, `Block.cpp`, and `main.cpp`, responsible for implementin
 2. Compile the program:
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++11 main.cpp Block.cpp buffer.cpp HeaderRecord.cpp Index.cpp -o app.exe```
+		g++ -std=c++11 main.cpp Block.cpp buffer.cpp HeaderRecord.cpp Index.cpp -o app.exe
+  		```
 	- On Windows (with MSVC):
 		```cmd
-		cl /EHsc /std:c++latest main.cpp Block.cpp buffer.cpp HeaderRecord.cpp Index.cpp /Fe:app.exe```
+		cl /EHsc /std:c++latest main.cpp Block.cpp buffer.cpp HeaderRecord.cpp Index.cpp /Fe:app.exe
+  		```
 3. Run the executable:
 	- Unix-like systems:
 		```bash
-		./app.exe```
+		./app.exe
+  		```
 	- Windows:
 		```cmd
-		app.exe```
+		app.exe
+  		```
 
 ## How to Use
 1. Place us_postal_codes.csv in the same directory as the executable.
@@ -106,4 +110,5 @@ Developer of `Block.h`, `Block.cpp`, and `main.cpp`, responsible for implementin
 - Create automated test scripts for insertion/deletion scenarios.
 
 ## License
+
 This project is for academic and personal use. Retain the copyright notice: "CSCI 331 Group Project - Copyright © 2024 Blocked Sequence Set Zip Code Processing System".
