@@ -30,7 +30,8 @@ This project is a responsive fan website titled "Minnesota Timberwolves Fan Page
 1. Clone or download the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>```
+   cd <repository-directory>
+   ```
 2. Open index.html in a web browser to view the site.
 
 ## Usage
@@ -41,4 +42,5 @@ This project is a responsive fan website titled "Minnesota Timberwolves Fan Page
 - Note: The layout adapts to screen size; test on different devices or use browser developer tools to emulate.
 
 ## License
+
 This project is for personal and fan use. Retain the copyright notice: "Copyright Thomas Hoerger © 2023- Minnesota Timberwolves Fan Page".
