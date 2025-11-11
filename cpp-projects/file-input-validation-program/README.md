@@ -40,25 +40,31 @@ This is a C++ console-based program designed to read integers from a file and ve
 2. Compile the program:
 	- For short-circuit version:
 		```bash
-		g++ -std=c++11 file-input-validation-program.cpp -o file_validator```
+		g++ -std=c++11 file-input-validation-program.cpp -o file_validator
+  		```
 	- For non-short-circuit version:
 		```bash
-		g++ -std=c++11 file-input-validation-program-no-short-circuit.cpp -o file_validator_no_short```
+		g++ -std=c++11 file-input-validation-program-no-short-circuit.cpp -o file_validator_no_short
+  		```
 	- On Windows (with MSVC):
 		```cmd
 		cl /EHsc /std:c++11 file-input-validation-program.cpp /Fe:file_validator.exe
-		cl /EHsc /std:c++11 file-input-validation-program-no-short-circuit.cpp /Fe:file_validator_no_short.exe```
+		cl /EHsc /std:c++11 file-input-validation-program-no-short-circuit.cpp /Fe:file_validator_no_short.exe
+  		```
 3. Run the executable:
 	- Short-circuit version (reads from data.txt):
 		```bash
-		./file_validator```
+		./file_validator
+  		```
 	- Non-short-circuit version (runs all test cases):
 		```bash
-		./file_validator_no_short```
+		./file_validator_no_short
+  		```
 	- Windows:
 		```cmd
 		file_validator.exe
-		file_validator_no_short.exe```
+		file_validator_no_short.exe
+  		```
 		
 ## How to Use
 1. Short-Circuit Version (file-input-validation-program.cpp):
@@ -86,4 +92,5 @@ This is a C++ console-based program designed to read integers from a file and ve
 - Add validation for non-integer inputs in the file.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2024 File Input Validation Program".
