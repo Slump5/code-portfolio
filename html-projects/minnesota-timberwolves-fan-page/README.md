@@ -33,7 +33,8 @@ This project is a static fan website titled "Minnesota Timberwolves Fan Page," c
 1. Clone or download the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>```
+   cd <repository-directory>
+   ```
 2. Open index.html (or any other .html file) in a web browser to view the site.
 
 ## Usage
@@ -45,4 +46,5 @@ This project is a static fan website titled "Minnesota Timberwolves Fan Page," c
 - Note: The layout is designed for a specific resolution; resizing the browser may not adjust content proportionally.
 
 ## License
+
 This project is for personal and fan use. Retain the copyright notice: "Copyright Thomas Hoerger © 2022 - Minnesota Timberwolves Fan Page".
