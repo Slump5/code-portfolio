@@ -26,7 +26,8 @@ This is a simple static website created by Thomas Hoerger, a computer science st
 1. Clone or download the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>```
+   cd <repository-directory>
+   ```
 2. Open any of the .html files (Home.html) in a web browser to start exploring the site.
 
 ## Usage
@@ -35,4 +36,5 @@ This is a simple static website created by Thomas Hoerger, a computer science st
 - View personal insights and goals under the "About Me" and "My Goals" sections on the Home page.
 
 ## License
+
 This project is for personal use and educational purposes. Please retain the copyright notice: "Thomas Hoerger - Copyright © 2022 My Website".
