@@ -36,21 +36,26 @@ Developer of `buffer.h` and contributed to `buffer.cpp`, responsible for impleme
 1. Clone the repository:
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Compile the program:
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++11 main.cpp CSVProcessing.cpp buffer.cpp -o zipprocessor```
+		g++ -std=c++11 main.cpp CSVProcessing.cpp buffer.cpp -o zipprocessor
+  		```
 	- On Windows (with MSVC):
 		```bash
-		cl /EHsc /std:c++latest main.cpp CSVProcessing.cpp buffer.cpp /Fe:zipprocessor.exe```
+		cl /EHsc /std:c++latest main.cpp CSVProcessing.cpp buffer.cpp /Fe:zipprocessor.exe
+  		```
 3. Run the executable:
 	- Unix-like systems:
 		```bash
-		./zipprocessor```
+		./zipprocessor
+  		```
 	- Windows:
 		```bash
-		zipprocessor.exe```
+		zipprocessor.exe
+  		```
 
 ## How to Use
 1. Ensure us_postal_codes.csv is in the current directory.
@@ -79,4 +84,5 @@ Developer of `buffer.h` and contributed to `buffer.cpp`, responsible for impleme
 - Optimize for very large datasets with parallel processing.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "CSCI 331 Group Project - Copyright © 2024 Zip Code Extremes Processor".
