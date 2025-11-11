@@ -43,32 +43,40 @@ This is a Docker-based distributed system deployment for a midterm project. It s
 1. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Prepare files: Ensure all Dockerfiles, configs, and source files are in the appropriate directories (Rust files in a subdirectory with Cargo.toml and main.rs).
 3. Rename docker files to Dockerfile.nginx, Dockerfile.spark, and Dockerfile.rust.
 4. Build Docker images:
 	- For NGINX:
 		```bash
-		docker build -t nginx-container -f Dockerfile.nginx .```
+		docker build -t nginx-container -f Dockerfile.nginx .
+  		```
 	- For Spark:
 		```bash
-		docker build -t spark-container -f Dockerfile.spark .```
+		docker build -t spark-container -f Dockerfile.spark .
+  		```
 	- For Rust:
 		```bash
-		docker build -t rust-container -f Dockerfile.rust .```
+		docker build -t rust-container -f Dockerfile.rust .
+  		```
 5. Create Docker network:
 	```bash
-	docker network create my-network```
+	docker network create my-network
+ 	```
 6. Run containers (attach to network):
 	- NGINX:
 		```bash
-		docker run -d --name nginx_container --network my-network -p 80:80 nginx-container```
+		docker run -d --name nginx_container --network my-network -p 80:80 nginx-container
+  		```
 	- Spark:
 		```bash
-		docker run -d --name spark_container --network my-network spark-container```
+		docker run -d --name spark_container --network my-network spark-container
+  		```
 	- Rust:
 		```bash
-		docker run --name rust_container --network my-network rust-container```
+		docker run --name rust_container --network my-network rust-container
+  		```
 7. For GCS access: Run the Jupyter notebook or text script to set up Spark session and test bucket connectivity (requires key.json upload).
 
 ## How to Use
@@ -76,17 +84,21 @@ This is a Docker-based distributed system deployment for a midterm project. It s
 2. Test inter-container communication:
 	- From host: Use curl to query NGINX (proxies to Spark):
 		```bash
-		curl http://localhost:80``` Should return a hello message or Spark response
+		curl http://localhost:80
+  		```
+  		Should return a hello message or Spark response
 	- Run Rust container to see it query NGINX internally.
 3. Access GCS bucket:
 	- In a Python environment or container: Run the code from Data_bucket_access.txt or notebook to create Spark session, authenticate, and read sample_data.csv:
 		```python
 		df = spark.read.csv("gs://my-midterm-project-bucket/sample_data.csv", header=True)
-		df.show()```
+		df.show()
+  		```
 4. Simple client query: Use Rust container logs or curl to send a request that involves all containers (e.g., Rust -> NGINX -> Spark).
 5. View logs for debugging:
 	```bash
-	docker logs <container-name>```
+	docker logs <container-name>
+ 	```
 6. For demo: Play docker-project-video-demo.mkv to view the recorded demo (5-10 minutes) showing build/run steps, curl tests, and data access.
 7. Submission: Upload source code, setups, documentation (PPT), and unzipped video (docker-project-video-demo.mkv) to D2L; include author names in code comments.
 
@@ -116,3 +128,4 @@ This is a Docker-based distributed system deployment for a midterm project. It s
 
 ## License
 This project is for educational and personal use. Retain the copyright notice: "Brady Theisen, Thomas Hoerger, Jake Cronk - Copyright © 2024 Group Docker Project".
+
