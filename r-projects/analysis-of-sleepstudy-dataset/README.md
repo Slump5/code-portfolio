@@ -30,16 +30,19 @@ This is an R Markdown-based analysis of sleep habits, academic outcomes, and wel
 1. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Install required packages (if not already):
 	```r
-	install.packages(c("tidyverse", "knitr"))```
+	install.packages(c("tidyverse", "knitr"))
+ 	```
 3. Set the working directory to the project folder (containing sleepstudy.csv).
 4. Knit the Rmd to HTML:
 	- In R console:
 		```r
 		library(rmarkdown)
-		render("sleepstudy-dataset-thomashoerger.Rmd")```
+		render("sleepstudy-dataset-thomashoerger.Rmd")
+  		```
 	- In RStudio: Open the Rmd and click "Knit" (outputs HTML).
 
 ## How to Use
@@ -82,3 +85,4 @@ This is an R Markdown-based analysis of sleep habits, academic outcomes, and wel
 ## License
 
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 Sleep Study Dataset Analysis".
+
