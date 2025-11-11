@@ -47,7 +47,8 @@ Skyview is a PHP-based web application designed for interactively viewing weathe
 1. **Clone the Repository (if applicable):**
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Set Up MySQL Database:
 	- Create a MySQL database named weather_app.
 	- Create tables: Users, WeatherReports, Locations, Forecasts with appropriate schema.
@@ -56,7 +57,8 @@ Skyview is a PHP-based web application designed for interactively viewing weathe
 	- Install Composer if not already installed: getcomposer.org.
 	- Run the following command in the project directory to install the Google API Client Library:
 		```bash
-		composer install```
+		composer install
+  		```
 4. Configure Google OAuth:
 	- Create a project in the Google Cloud Console.
 	- Enable the Google+ API and create OAuth 2.0 credentials.
