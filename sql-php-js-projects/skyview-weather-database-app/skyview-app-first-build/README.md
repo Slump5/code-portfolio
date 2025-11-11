@@ -49,10 +49,12 @@ This is a full-stack mobile weather tracking application built with React Native
 1. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Install dependencies (in the Expo project directory):
 	```bash
-	npm install```
+	npm install
+ 	```
 	- Ensure react-native-swiper, react-native-maps, react-native-chart-kit are installed via npm if not in package.json.
 3. Set up the backend:
 	- Deploy Ubuntu on Google Cloud VPS.
@@ -63,7 +65,8 @@ This is a full-stack mobile weather tracking application built with React Native
 4. Run the Expo app:
 	- Start the development server:
 		```bash
-		npx expo start```
+		npx expo start
+  		```
 	- Scan the QR code with Expo Go app on mobile, or press 'w' for web view in browser.
 5. For production: Build with npx expo build (requires Expo account).
 
