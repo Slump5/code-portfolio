@@ -22,21 +22,25 @@ This is a C++ implementation of a non-recursive Quicksort algorithm, designed to
 1. Clone or download the source code:
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Compile the program:
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++11 non-recursive-quicksort.cpp -o quicksort```
+		g++ -std=c++11 non-recursive-quicksort.cpp -o quicksort
+  		```
 	- On Windows (with MSVC):
 		```cmd
 		cl /EHsc /std:c++11 non-recursive-quicksort.cpp /Fe:quicksort.exe```
 3. Run the executable:
 	- Unix-like systems:
 		```bash
-		./quicksort```
+		./quicksort
+  		```
 	- Windows:
 		```cmd
-		quicksort.exe```
+		quicksort.exe
+  		```
 
 ## How It Works
 1. The program initializes an example array of integers.
@@ -65,4 +69,5 @@ Sorted array: 1 2 3 4 5 6 7 10 12 15
 - Support sorting of other data types using templates.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2024 Non-Recursive Quicksort".
