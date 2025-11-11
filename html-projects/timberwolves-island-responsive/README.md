@@ -38,7 +38,8 @@ This project is a static fan website titled "Timberwolves Island," created by Th
 1. Clone or download the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>```
+   cd <repository-directory>
+   ```
 2. Open index.html (or any other .html file) in a web browser to view the site.
 
 ## Usage
@@ -50,4 +51,5 @@ This project is a static fan website titled "Timberwolves Island," created by Th
 - Note: Content is from 2023 and may be outdated as of 2025; the layout adjusts responsively but is optimized for desktop.
 
 ## License
+
 This project is for personal and fan use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2023 Timberwolves Island".
