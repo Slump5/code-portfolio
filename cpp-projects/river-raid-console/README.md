@@ -33,21 +33,26 @@ This is a C++ console-based implementation of a simplified "River Raid" game, in
 1. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Compile the program:
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++11 river-raid-console.cpp -o riverraid```
+		g++ -std=c++11 river-raid-console.cpp -o riverraid
+  		```
 	- On Windows (with MSVC):
 		```cmd
-		cl /EHsc /std:c++11 river-raid-console.cpp /Fe:riverraid.exe```
+		cl /EHsc /std:c++11 river-raid-console.cpp /Fe:riverraid.exe
+  		```
 3. Run the executable:
 	- Unix-like systems:
 		```bash
-		./riverraid```
+		./riverraid
+  		```
 	- Windows:
 		```cmd
-		riverraid.exe```
+		riverraid.exe
+  		```
 
 ## How to Use
 1. Compile and run the program as described above.
@@ -80,4 +85,5 @@ This is a C++ console-based implementation of a simplified "River Raid" game, in
 - Create a high-score system with persistent storage.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2024 River Raid Console Game".
