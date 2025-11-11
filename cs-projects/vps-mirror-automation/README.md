@@ -34,24 +34,33 @@ This is a C# application simulating a Virtual Private Server (VPS) mirror system
 1. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Compile the program:
 	- Using dotnet CLI (cross-platform):
 		```bash
 		dotnet new console -o VPSMirror
 		# Copy main-server.cs into VPSMirror directory and replace Program.cs if needed
 		cd VPSMirror
-		dotnet build```
+		dotnet build
+  		```
 	- Using Visual Studio: Open main-server.cs as a new console app project, build the solution.
 3. Run the executable:
 	- dotnet CLI:
 		```bash
-		dotnet run```
+		dotnet run
+  		```
 	- Visual Studio: Run from IDE.
 	- Standalone executable (after publish):
+		- (Unix-like):
 		```bash
 		dotnet publish -c Release -o out
-		./out/VPSMirror``` (Unix-like) or ```cmd out\VPSMirror.exe``` (Windows).
+		./out/VPSMirror
+  		``` 
+  		- (Windows)
+  		```cmd
+  		out\VPSMirror.exe
+  		```
 
 ## How to Use
 1. Update the mirror server IP and port in main-server.cs (use "127.0.0.1" for local testing).
@@ -91,4 +100,5 @@ This is a C# application simulating a Virtual Private Server (VPS) mirror system
 - Optimize for higher thread counts or real-time data sources.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2023 VPS Mirror Automation".
