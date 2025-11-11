@@ -31,15 +31,18 @@ This project analyzes the "HomesForSale" dataset to investigate the influence of
 2. Install required R packages:
    ```R
    install.packages("tidyverse")
-   install.packages("knitr")```
+   install.packages("knitr")
+   ```
 3. Open `homesforsale-dataset-thomashoerger.Rmd` in RStudio or an R environment.
 4. Set the working directory to the project folder:
-	``language-R
-	setwd("path/to/project/directory")``
-5. Render the R Markdown file to HTML:
 	```language-R
-	rmarkdown::render("homesforsale-dataset-thomashoerger.Rmd")```
-6. View the generated `homesforsale-dataset-thomashoerger.html` in a web browser.
+	setwd("path/to/project/directory")
+	```
+6. Render the R Markdown file to HTML:
+	```language-R
+	rmarkdown::render("homesforsale-dataset-thomashoerger.Rmd")
+ 	```
+7. View the generated `homesforsale-dataset-thomashoerger.html` in a web browser.
 
 ## How to Use
 1. Place homesforsale.csv in the same directory as homesforsale-dataset-thomashoerger.Rmd.
@@ -76,3 +79,4 @@ This project analyzes the "HomesForSale" dataset to investigate the influence of
 ## License
 
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 HomesForSale Data Analysis".
+
