@@ -29,21 +29,26 @@ This is a console-based implementation of the classic Klondike Solitaire card ga
 1. Clone the repository:
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Compile the program:
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++17 main.cpp Game.cpp Deck.cpp Card.cpp -o solitaire```
+		g++ -std=c++17 main.cpp Game.cpp Deck.cpp Card.cpp -o solitaire
+  		```
 	- On Windows (with MSVC):
 		```cmd
-		cl /EHsc /std:c++17 main.cpp Game.cpp Deck.cpp Card.cpp /Fe:solitaire.exe```
+		cl /EHsc /std:c++17 main.cpp Game.cpp Deck.cpp Card.cpp /Fe:solitaire.exe
+  		```
 3. Run the executable:
 	- Unix-like systems
 		```bash
-		./solitaire```
+		./solitaire
+  		```
 	- Windows
 		```cmd
-		solitaire.exe```
+		solitaire.exe
+  		```
 		
 ## How to play
 1. Start the game and choose between one-card (1) or three-card (3) draw mode.
@@ -73,3 +78,4 @@ This is a console-based implementation of the classic Klondike Solitaire card ga
 ## License
 
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 Basic Console Solitaire".
+
