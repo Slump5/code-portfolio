@@ -12,16 +12,14 @@ from datetime import datetime, timedelta  # Handles timestamps
 import time          # For delays and interval control
 import shutil        # For moving and deleting files/directories
 
-# ===========================
+
 #  CONFIGURATION
-# ===========================
 # Hard-coded root directory (change this to your target path)
 root_directory = r"date folder path"   # <--- Change to your actual data path (Set to the folder that contains data and data subfolders)
 log_file_path = os.path.join(os.path.dirname(root_directory), "shuffleLog.txt")  # Log file stored one level above the root data folder
 
-# ===========================
+
 #  LOGGING UTILITIES
-# ===========================
 def log(message):
     """Writes a message to the shuffle log with timestamp."""
     # Appends messages to the log file with current datetime
@@ -52,9 +50,8 @@ def display_file_info(file_names_record, timestamp_record, category_path):
 
         logFile.write("-" * 90 + "\n")
 
-# ===========================
+
 #  CORE FUNCTIONS
-# ===========================
 def rename_files_in_subdirs(directory):
     """Safely renames all files in subdirectories with unique random numbers."""
     file_name_change_record = []  # Records old/new names for logging
@@ -142,9 +139,8 @@ def clean_up_subdirectories(directory):
         if subdir != directory:  # Don’t delete the root folder itself
             shutil.rmtree(subdir, ignore_errors=True)  # Remove folder quietly
 
-# ===========================
+
 #  MAIN FUNCTION
-# ===========================
 def main():
     # List all immediate subdirectories inside the root directory
     categories = [
@@ -173,9 +169,8 @@ def main():
 
     log("✅ All tasks completed.\n")  # Record summary completion
 
-# ===========================
+
 #  EXECUTION CONTROL
-# ===========================
 if __name__ == "__main__":
     print("File Shuffle Utility")
     print("====================")
@@ -200,4 +195,5 @@ if __name__ == "__main__":
         else:
             # Invalid input handling
             print("Invalid input. Please enter 'A' or 'M'.")
+
 
