@@ -21,7 +21,8 @@ This is a basic static website created by Thomas Hoerger as part of his learning
 1. Clone or download the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>```
+   cd <repository-directory>
+   ```
 2. Open assignment-1-thomashoerger.html in a web browser to view the blog.
 
 ## Usage
@@ -30,4 +31,5 @@ This is a basic static website created by Thomas Hoerger as part of his learning
 - Click the NHCC Home Page link to visit the college's website for additional resources.
 
 ## License
+
 This project is for personal use and educational purposes. Please retain the copyright notice: "Thomas Hoerger - Copyright © 2022 My Blog".
