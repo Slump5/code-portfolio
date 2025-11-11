@@ -26,21 +26,26 @@ This is a console-based implementation of the classic Tic-Tac-Toe game, written 
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>```
+   cd <repository-directory>
+   ```
 2. Compile the program:
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++11 tictactoe.cpp -o tictactoe```
+		g++ -std=c++11 tictactoe.cpp -o tictactoe
+  		```
 	- On Windows (with MSVC):
 		```cmd
-		cl /EHsc /std:c++latest tictactoe.cpp /Fe:tictactoe.exe```
+		cl /EHsc /std:c++latest tictactoe.cpp /Fe:tictactoe.exe
+  		```
 3. Run the executable:
 	- Unix-like systems
 		```bash
-		./tictactoe```
+		./tictactoe
+  		```
 	- Windows
 		```cmd
-		tictactoe.exe```
+		tictactoe.exe
+  		```
 
 ## How to play
 1. Start the game and choose a mode:
@@ -68,4 +73,5 @@ This is a console-based implementation of the classic Tic-Tac-Toe game, written 
 - Include sound effects or ASCII art enhancements.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2023 Basic Console Tic Tac Toe".
