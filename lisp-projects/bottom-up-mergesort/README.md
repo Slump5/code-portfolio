@@ -20,29 +20,36 @@ This is a Common Lisp implementation of a bottom-up merge sort algorithm. The pr
 ## Compilation and Running
 1. Ensure a Common Lisp environment is installed (SBCL):
 	- Installing SBCL on Unix-like systems
+		- Debian/Ubuntu:
 		```bash
-		sudo apt-get install sbcl```  # Debian/Ubuntu
-		or
+		sudo apt-get install sbcl
+  		```
+  		- macOS:
 		```bash
-		brew install sbcl```  # macOS
+		brew install sbcl
+  		``` 
 2. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 3. Load and run the program in a Lisp REPL:
 	- Start the Lisp REPL (sbcl)
 	- Load the file:
 		```lisp
-		(load "bottom-up-mergesort.lisp")```
+		(load "bottom-up-mergesort.lisp")
+  		```
 	- Example usage in the REPL:
 		```lisp
-		(bottom-up-merge-sort '(5 2 9 1 5 6))```
+		(bottom-up-merge-sort '(5 2 9 1 5 6))
+  		```
 
 ## How to Use
 1. Load bottom-up-mergesort.lisp into your Lisp environment.
 2. Call the main sorting function with a list:
 	```lisp
-	(bottom-up-merge-sort <your-list>)```
+	(bottom-up-merge-sort <your-list>)
+ 	```
 3. The function returns a new sorted list, leaving the input list unchanged.
 4. Test with different input types (numbers, strings) as long as they support comparison operators (< or >).
 
@@ -62,4 +69,5 @@ This is a Common Lisp implementation of a bottom-up merge sort algorithm. The pr
 - Add documentation comments for compatibility with Lisp documentation tools.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2024 Bottom-up Mergesort".
