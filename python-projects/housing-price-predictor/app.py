@@ -1,11 +1,9 @@
-# ======================================================================
 # Author: Thomas Hoerger
 # Copyright: Thomas Hoerger – Copyright © 2025 Housing Price Predictor
 # File: app.py
 # Date: November 10, 2025
 # Description:
 # Flask web app for predicting home prices using Ames Housing data.
-# ======================================================================
 
 from flask import Flask, render_template, request
 import pandas as pd
@@ -45,3 +43,4 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
