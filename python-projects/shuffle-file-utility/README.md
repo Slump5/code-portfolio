@@ -2,7 +2,7 @@
 
 ## Overview
 This is a Python-based console utility that safely shuffles and randomizes files in subdirectories.  
-The script is designed for dataset preparation and anonymization, allowing users to automatically or manually randomize filenames, modify timestamps, clean subdirectories, and log all actions. It combines robust file handling with detailed logging to ensure safe and repeatable file operations.
+The script is designed for dataset preparation and anonymization, allowing users to automatically or manually randomize filenames, modify timestamps, clean subdirectories, and log all actions. It combines robust file handling with detailed logging to ensure safe and repeatable file operations. (data folder not included)
 
 ## Features
 - **Automatic or Manual Execution:** Choose between continuous auto mode or one-time manual run.
@@ -67,5 +67,6 @@ The script is designed for dataset preparation and anonymization, allowing users
 This project is for personal and educational use.  
 Retain the copyright:
 **Thomas Hoerger - Copyright © 2024 Shuffle File Utility**
+
 
 
