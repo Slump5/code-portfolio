@@ -69,7 +69,8 @@ SkyView is a full-stack, responsive weather tracking application developed using
 	- Install Apache, PHP, and MySQL:
 		```bash
 		sudo apt update
-		sudo apt install apache2 php mysql-server php-mysql```
+		sudo apt install apache2 php mysql-server php-mysql
+  		```
 	- Create the weather_app database and tables (Users, Locations, WeatherReports, Forecasts, Alerts, Feedback).
 	- Place PHP scripts (add_weather.php, search_weather.php, etc.) in the Apache web root ('/var/www/html').
 	- Configure MySQL credentials in PHP scripts (root, password or update as needed).
@@ -78,23 +79,28 @@ SkyView is a full-stack, responsive weather tracking application developed using
 	- Clone the repository (if applicable):
 		```bash
 		git clone <repository-url>
-		cd <repository-directory>```
+		cd <repository-directory>
+  		```
 	- Install Expo CLI:
 		```bash
-		npm install -g expo-cli```
+		npm install -g expo-cli
+  		```
 	- Create Expo project:
 		```bash
 		npx create-expo-app weather-swiper-blank
-		cd weather-swiper-blank```
+		cd weather-swiper-blank
+  		```
 	- Install dependencies:
 		```bash
-		npm install react-native-swiper react-native-maps react-native-chart-kit lottie-react-native @react-navigation/native @react-navigation/native-stack react-native-dropdown-picker```
+		npm install react-native-swiper react-native-maps react-native-chart-kit lottie-react-native @react-navigation/native @react-navigation/native-stack react-native-dropdown-picker
+  		```
 	- Add provided frontend files (App.js, MainSwiper.js, etc.) to the project directory.
 	- Update API endpoints in frontend files to match VPS IP ('http://34.123.143.201').
 3. Running the App:
 	- Start the Expo development server:
 		```bash
-		npx expo start```
+		npx expo start
+  		```
 	- Use Expo Go app to scan the QR code for mobile testing, or run in a simulator.
 	- Ensure the VPS is running and accessible for backend API calls.
 	
