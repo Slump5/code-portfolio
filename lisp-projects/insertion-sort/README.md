@@ -24,13 +24,16 @@ This is a Common Lisp implementation of the Insertion Sort algorithm, designed t
 3. Load and run the code:
 	- In SBCL:
 		```bash
-		sbcl --script insertion-sort.lisp```
+		sbcl --script insertion-sort.lisp
+  		```
 	- In CLISP:
 		```bash
-		clisp insertion-sort.lisp```
+		clisp insertion-sort.lisp
+  		```
 	- Alternatively, load interactively in a Lisp REPL:
 		```lisp
-		(load "insertion-sort.lisp")```
+		(load "insertion-sort.lisp")
+  		```
 4. The program will print the original list and the sorted list in descending order.
 
 ## How to Use
@@ -44,7 +47,8 @@ This is a Common Lisp implementation of the Insertion Sort algorithm, designed t
 	```lisp
 	(setq *my-list* '(your numbers here))
 	(setq *sorted-list* (descending-insertion-sort *my-list*))
-	(print *sorted-list*)```
+	(print *sorted-list*)
+ 	```
 
 ## Project Notes
 - **Algorithm Details:** Insertion Sort builds the sorted list one element at a time, inserting each element into its correct position in a descending-ordered list.
@@ -63,4 +67,5 @@ This is a Common Lisp implementation of the Insertion Sort algorithm, designed t
 - Extend to support sorting custom objects with a user-defined comparison function.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2024 Insertion Sort".
