@@ -40,17 +40,20 @@ This is a PHP-based web application designed to provide an interactive interface
 3. **Restart Apache:**
 	- On Unix-like systems:
 		```bash
-		sudo systemctl restart apache2```
+		sudo systemctl restart apache2
+  		```
 	- On Windows (with XAMPP or similar): Restart Apache via the control panel.
 4. Access the Application:
 	- Navigate to http://<External-IP>/weather_ui.php in a browser (replace <External-IP> with your server's IP or localhost).
 5. Verify Server Status:
 	- Ensure MySQL is running:
 		```bash
-		sudo systemctl status mysql```
+		sudo systemctl status mysql
+  		```
 	- Ensure Apache is running:
 		```bash
-		sudo systemctl status apache2```
+		sudo systemctl status apache2
+  		```
 		
 ## How to Use
 1. Open the application in a browser (http://<External-IP>/weather_ui.php).
