@@ -31,21 +31,26 @@ This is a console-based implementation of a two-player Dominoes game, written in
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>```
+   cd <repository-directory>
+   ```
 2. Compile the program:
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++11 game.cpp -o dominoes```
+		g++ -std=c++11 game.cpp -o dominoes
+  		```
 	- On Windows (with MSVC):
 		```cmd
-		cl /EHsc /std:c++latest tictactoe.cpp /Fe:tictactoe.exe```
+		cl /EHsc /std:c++latest tictactoe.cpp /Fe:tictactoe.exe
+  		```
 3. Run the executable:
 	- Unix-like systems
 		```bash
-		./dominoes```
+		./dominoes
+  		```
 	- Windows
 		```cmd
-		dominoes.exe```
+		dominoes.exe
+  		```
 		
 ## How to Play
 1. The game starts by randomly selecting the first player (human or AI).
@@ -78,4 +83,5 @@ This is a console-based implementation of a two-player Dominoes game, written in
 - Add a menu for selecting game modes or difficulty levels.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2024 Dominoes Console Game".
