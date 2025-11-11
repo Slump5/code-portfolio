@@ -51,21 +51,26 @@ Developer of `CSVLengthIndicated.h` and `CSVLengthIndicated.cpp`, responsible fo
 1. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 2. Compile the program (include all source files):
 	- On Unix-like systems (Linux/MacOS):
 		```bash
-		g++ -std=c++11 maintester.cpp buffer.cpp CSVLengthIndicated.cpp HeaderBuffer.cpp IndexFile.cpp CSVProcessing.cpp -o zipprocessor```
+		g++ -std=c++11 maintester.cpp buffer.cpp CSVLengthIndicated.cpp HeaderBuffer.cpp IndexFile.cpp CSVProcessing.cpp -o zipprocessor
+  		```
 	- On Windows (with MSVC):
 		```cmd
-		cl /EHsc /std:c++latest maintester.cpp buffer.cpp CSVLengthIndicated.cpp HeaderBuffer.cpp IndexFile.cpp CSVProcessing.cpp /Fe:zipprocessor.exe```
+		cl /EHsc /std:c++latest maintester.cpp buffer.cpp CSVLengthIndicated.cpp HeaderBuffer.cpp IndexFile.cpp CSVProcessing.cpp /Fe:zipprocessor.exe
+  		```
 3. Run the executable:
 	- Unix-like systems:
 		```bash
-		./zipprocessor```
+		./zipprocessor
+  		```
 	- Windows:
 		```cmd
-		zipprocessor.exe```
+		zipprocessor.exe
+  		```
 
 ## How to Use
 1. Ensure input CSVs (us_postal_codes.csv and us_postal_codes_ROWS_RANDOMIZED.csv) are in the current directory.
@@ -103,4 +108,5 @@ Developer of `CSVLengthIndicated.h` and `CSVLengthIndicated.cpp`, responsible fo
 - Create a full user guide PDF and test document with scripts.
 
 ## License
+
 This project is for personal use. Retain the copyright notice: "CSCI 331 Group Project - Copyright © 2024 Zip Code Data Processing System".
