@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- 
+  Author: Thomas Hoerger
+  Copyright: Thomas Hoerger – Copyright © 2025 Housing Price Predictor
+  File: result.html
+  Date: November 10, 2025
+  Description: Displays prediction result for the Housing Price Predictor web app.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>{{ prediction_text }}</h2>
+    <a href="/" class="back">← Try Another Prediction</a>
+  </div>
+</body>
+</html>

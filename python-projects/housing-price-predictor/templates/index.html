@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- 
+  Author: Thomas Hoerger
+  Copyright: Thomas Hoerger – Copyright © 2025 Housing Price Predictor
+  File: index.html
+  Date: November 10, 2025
+  Description: Home page for the Housing Price Predictor web app.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Price Predictor 🏡</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Home Price Predictor 🏡</h1>
+    <p class="subtitle">Enter your home's details below to estimate its market value.</p>
+
+    <form action="/predict" method="POST">
+
+      <label>📏 Living Area (sq ft)</label>
+      <input type="number" name="GrLivArea" value="1500" required>
+
+      <label>🛏️ Bedrooms</label>
+      <input type="number" name="BedroomAbvGr" value="3" required>
+
+      <label>🛁 Bathrooms</label>
+      <input type="number" name="FullBath" value="2" required>
+
+      <label>🚗 Garage Size (how many cars it fits)</label>
+      <input type="number" name="GarageCars" value="2" required>
+
+      <label>📅 Year Built</label>
+      <input type="number" name="YearBuilt" value="2005" required>
+
+      <label>🌳 Lot Size (sq ft)</label>
+      <input type="number" name="LotArea" value="6000" required>
+
+      <button type="submit">💰 Predict Price</button>
+    </form>
+  </div>
+</body>
+</html>
