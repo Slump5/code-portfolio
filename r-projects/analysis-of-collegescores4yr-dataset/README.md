@@ -31,18 +31,21 @@ This is an R-based analysis project for processing and exploring the CollegeScor
 ## Installation and Running
 1. Install R and required packages if not already available:
 	```R
-	install.packages(c("ggplot2", "dplyr", "readr", "knitr"))```
+	install.packages(c("ggplot2", "dplyr", "readr", "knitr"))
+ 	```
 2. Clone the repository (if applicable):
 	```bash
 	git clone <repository-url>
-	cd <repository-directory>```
+	cd <repository-directory>
+ 	```
 3. Open the Rmd file in RStudio:
 	- Load the project or set working directory to the folder containing the files.
 	- Run: setwd("path/to/directory")
 4. Knit the Rmd to generate/update the HTML:
 	- In RStudio: Click the "Knit" button or run:
 		```language-R
-		rmarkdown::render("analysis-of-collegescores4yr-dataset-thomashoeger.Rmd")```
+		rmarkdown::render("analysis-of-collegescores4yr-dataset-thomashoeger.Rmd")
+  		```
 	- From R console: Source the Rmd or execute chunks manually.
 
 ## How to Use
@@ -76,3 +79,4 @@ This is an R-based analysis project for processing and exploring the CollegeScor
 ## License
 
 This project is for personal use. Retain the copyright notice: "Thomas Hoerger - Copyright © 2025 Analysis of CollegeScores4yr Dataset".
+
