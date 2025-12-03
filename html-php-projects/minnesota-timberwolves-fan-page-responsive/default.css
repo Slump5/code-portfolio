@@ -1,0 +1,138 @@
+/* Default media query for mobile in alphabetical order*/
+
+/* I made sure to look up the timberwolves colors in hex so I could get the correct color scheme. */
+article{
+    margin-left: 5%;
+}
+article li{
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    margin-left: -20%;
+}
+/* Css for the background image (the chains). */
+body{
+    background-color: #006400;
+    background-image: url(ant.jpg);
+    background-size: cover;
+    background-position: center;
+
+}
+footer{
+    text-align: center;
+    padding-top: 1%;
+    font-family: 'Roboto Slab', serif;
+    color: #236192;
+}
+h2{
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Roboto Slab', serif;
+}
+
+header h1{
+    padding-top: 2%;
+    color: #236192;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+}
+nav{
+    background-color: #78BE20;
+    max-width: 100%;
+    font-family: 'Open Sans', sans-serif;
+        
+}
+nav, header, footer, div, article{
+    box-sizing: border-box;
+}
+nav a{
+    color: #236192;
+    text-decoration: none;
+    font-size: 15px;
+    
+}
+/* Set the default nav image size and position. */
+nav img{
+    margin-left: 10%;
+    max-width: 100%;
+    display: block;
+    width: 80%;
+    height: 80%;
+    padding: 1%;
+}
+nav li{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    display: inline-block;
+    margin-right: 12%;
+}
+nav ul{
+    text-align: center;
+    list-style: none;
+    margin: 0;
+}
+
+.container{
+    margin-left: 20%;
+    padding-bottom: 3%;
+    padding-top: 1%;
+}
+/* I made a grid display for my three images so i oculd have them next to each other in three columns. Everything has a max-width. */
+figure{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 5%;
+}
+.footer{
+    background-color: #78BE20;
+    margin-left: 8%;
+    height: 1%;
+    max-width: 85%;
+    font-family: 'Roboto Slab', serif;
+    font-size: 15px;
+    padding-bottom: 3%;
+    color: #00008B;
+}
+/* I wanted to have a background behind the players to I added a background image of a basketball court. */
+.gallery{
+    max-width: 80%;
+    background-image: url(Court.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-left: 10%;
+}
+
+/* Css code for the player image size. */
+.img-size1{
+    max-width: 100%; 
+}
+.img-size2{
+    max-width: 200%;
+   width: 150%;
+    height: 100%;
+}
+/* Css for the main content section. */
+.main-content{
+    background-color: #78BE20;
+    max-width: 70%;
+    color: #236192;
+}
+/* Css for the entire page. */
+.page{
+    max-width: 50%;
+    background-color: #0C2340;
+    margin-left: 25%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-bottom: 1%
+}
+/* Css for the related content section. */
+.related-content{
+    background-color: #78BE20;
+    max-width: 70%;
+    color: #236192;
+}
+
+
+  
+

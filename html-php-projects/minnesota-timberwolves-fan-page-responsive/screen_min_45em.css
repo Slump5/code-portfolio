@@ -1,0 +1,36 @@
+/* Media Query for tablets*/
+
+/* When the screen size hits 45em the image changes position, the font gets bigger, the margins change, and the image changes size.  */
+article li{
+    font-size: 15px;
+    margin-left: 0;
+}
+figure{
+    margin-left: 0;
+}
+footer{
+    font-size: 20px;
+}
+h2{
+    font-size: 20px;
+}
+header h1{
+    font-size: 40px;
+}
+nav a{
+    font-size: 20px;
+}
+nav img{
+    margin-left: 0%;
+    max-width: 100%;
+    display: block;
+    width: 10%;
+    height: 10%;
+    float: left;
+    padding: 1%;
+
+}
+.img-size2{
+    width: 120%;
+}
+

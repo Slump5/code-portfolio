@@ -1,0 +1,25 @@
+/* Media Query for desktop*/
+
+/* When the screen hits 80em the font increases in size, figure margin changes and the display turns into a grid with two columns. */
+article li{
+    font-size: 20px;
+}
+figure{
+    margin-left: 0;
+}
+footer{
+    font-size: 24px;
+}
+h2{
+    font-size: 24px;
+}
+nav a{
+    font-size: 24px;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 13%;
+    padding-bottom: 3%;
+    padding-top: 1%;
+}

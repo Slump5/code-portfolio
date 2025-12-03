@@ -1,0 +1,131 @@
+/* Custom Css sheet in alphabetical order I used bootstrap I hope thats okay*/
+
+/* Css to change article properties*/
+article{
+    background-color: #78BE20;
+   border-radius: 10px;
+    
+}
+/* Css to change body properties*/
+body{
+    padding-top: 70px;
+    padding-bottom: 100px;
+    background-color: #0C2340;
+}
+/* Css to change header properties*/
+h3{
+    text-align: center;
+    color: #000000;
+    font-family: 'Roboto Slab', serif;
+}
+h4{
+    font-family: 'Roboto Slab', serif;
+}
+/* Css to change li properties*/
+li{
+    color: #000000;
+    font-family: 'Open Sans', sans-serif;
+}
+/* Css to change p properties*/
+p{
+    text-align: center;
+    color: #000000;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+/* Classes */
+
+/* Css to change the button properties */
+.btn-default{
+    color: #000000;
+    background-color: #D3D3D3;
+    font-family: 'Open Sans', sans-serif
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active{
+    color: #236192;
+    border-color: #000000;
+    background-color: #808080;
+    
+}
+.btn-success{
+    color: #000000;
+    background-color: #78BE20;
+    font-family: 'Open Sans', sans-serif;
+}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active{
+    color: #236192;
+    border-color: #000000;
+    
+}
+.img-size{
+    
+}
+/* Css to change the jumbotron properties*/
+.jumbotron{
+    background-color: #236192;
+}
+.jumbotron > h1{
+    color: #000000;
+    font-family: 'Roboto Slab', serif;
+}
+
+/* Css to change the navbar properties*/
+.navbar-default{
+    background-color: #9EA2A2;
+    border-color: #9EA2A2;
+}
+.navbar-default .navbar-brand{
+    color: #000000;
+    font-family: 'Roboto Slab', serif;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus{
+    color: #236192;
+    background-color: transparent;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #000000;
+    font-family: 'Roboto Slab', serif;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus{
+    color: #236192;
+    background-color: #808080;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus{
+    color: #236192;
+    background-color: transparent;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus{
+    color: #236192;
+    background-color: #808080;
+}
+.navbar-text > a{
+    text-decoration: none;
+}
+/* Css to change the thumbnail properties*/
+.thumbnail{
+    background-color: #236192;
+    overflow: hidden;
+    
+}
+.thumbnail img{
+    transition: all 0.3s ease 0s;
+    width: 100%;
+}
+.thumbnail img:hover{
+    transform: scale(1.1);
+}
+
+
