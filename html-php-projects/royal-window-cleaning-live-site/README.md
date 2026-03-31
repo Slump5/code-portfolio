@@ -1,17 +1,18 @@
-# Royal Window Cleaning Website
-
-## Overview
-This project is a fully responsive **business website** developed for **Royal Window Cleaning, Inc.**, a local company based in Maple Grove, Minnesota.
-
-The site promotes professional services including window cleaning, gutter cleaning, pressure washing, and blind repair/installation. It is designed to generate leads, showcase services, and provide a seamless user experience across desktop and mobile devices.
+# Royal Window Cleaning Website (Live Production Site)
 
 🌐 **Live Site:** https://royalwindowcleaninginc.com/
 
-The website is built using **HTML, CSS, and JavaScript**, with a strong focus on modern UI/UX, SEO optimization, and performance.
+## Overview
+This project is a fully responsive **production business website** developed for **Royal Window Cleaning, Inc.**, a real company based in Maple Grove, Minnesota.
+
+The website is actively used to promote services, generate leads, and provide a seamless user experience across desktop and mobile devices.
+
+Built using **HTML, CSS, and JavaScript**, the site focuses on modern UI/UX design, performance, and local SEO optimization.
 
 ---
 
 ## Features
+
 - **Responsive Design**  
   Fully optimized for mobile, tablet, and desktop using CSS media queries and flexible layouts.
 
@@ -37,6 +38,11 @@ The website is built using **HTML, CSS, and JavaScript**, with a strong focus on
   - Floating "Free Quote" button  
   - Google review link integration  
   - Testimonials section  
+
+- **Production Deployment**
+  - Live, deployed website actively used by a real business  
+  - Designed for customer acquisition and lead generation  
+  - Hosted and maintained for real-world usage  
 
 - **Animations & UX**
   - Scroll-based fade-in animations  
