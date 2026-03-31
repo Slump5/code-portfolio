@@ -88,12 +88,12 @@ const slide = document.getElementById("work-slide");
 if(slide){
 
 const images = [
-"./assets/images/003.JPEG",
-"./assets/images/royalpowerwash.109104255_std.jpg",
-"./assets/images/002.JPEG",
+"./assets/images/window-cleaning-example-2.JPEG",
+"./assets/images/pressure-wash-example-1.jpg",
+"./assets/images/window-cleaning-example-1.JPEG",
 "./assets/images/010.JPEG",
 "./assets/images/005.JPEG",
-"./assets/images/013.JPEG"
+"./assets/images/window-cleaning-example-9.JPEG"
 ];
 
 let index = 0;
@@ -272,11 +272,11 @@ const windowSlide = document.getElementById("window-slide");
 if(windowSlide){
 
 const windowImages=[
-"./assets/images/028.JPEG",
-"./assets/images/window-cleaning-example.JPEG",
-"./assets/images/Window_Cleaning.JPEG",
-"./assets/images/014.JPEG",
-"./assets/images/027.JPEG"
+"./assets/images/window-cleaning-example-5.JPEG",
+"./assets/images/window-cleaning-example-4.JPEG",
+"./assets/images/window-cleaning-example-3.JPEG",
+"./assets/images/window-cleaning-example-8.JPEG",
+"./assets/images/window-cleaning-example-7.JPEG"
 ];
 
 let windowIndex=0;
@@ -367,8 +367,8 @@ const blindSlide = document.getElementById("blind-slide");
 if(blindSlide){
 
 const blindImages=[
-"./assets/images/017.JPEG",
-"./assets/images/blind-example.JPEG",
+"./assets/images/blind-example-5.JPEG",
+"./assets/images/blind-example-1.JPEG",
 "./assets/images/blind-example-2.JPEG",
 "./assets/images/blind-example-3.JPEG",
 "./assets/images/blind-example-4.JPEG"
