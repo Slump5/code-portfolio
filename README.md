@@ -4,7 +4,7 @@ A collection of my programming projects across multiple languages and technologi
 
 ## ⭐ Featured Projects
 
-### Finance Portfolio App
+### 📊 Finance Portfolio App
 A full-stack financial portfolio management application built with Flask, SQLite, MongoDB, and external APIs.
 
 **Features:**
@@ -20,7 +20,7 @@ A full-stack financial portfolio management application built with Flask, SQLite
 
 <br>
 
-### Royal Window Cleaning Website
+### 🏢 Royal Window Cleaning Website
 A live multi-page business website developed for a real-world service company, featuring responsive design, structured navigation, and production-ready deployment.
 
 **Features:**
