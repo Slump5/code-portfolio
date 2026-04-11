@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<!--
+  G7 Finance Database Site
+  © 2024 G7 Finance. All rights reserved.
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard - G7 Finance</title>
+		<link
+			rel="stylesheet"
+			href="styles.css" />
+
+		<style>
+			html, body {
+				height: 100%;
+				min-height: 100vh;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background-color: var(--bg-secondary) !important;
+				display: flex;
+				flex-direction: column;
+			}
+			main {
+				flex: 1;
+			}
+		</style>
+
+		<script>
+			(function () {
+				const theme = localStorage.getItem('theme') || 'light';
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
+	</head>
+
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="logo">G7 Finance</div>
+				<div class="nav-links">
+					<a
+						href="dashboard.html"
+						class="active"
+						>Dashboard</a
+					>
+					<a href="portfolio.html">Portfolio</a>
+					<a href="favorites.html">Favorites</a>
+					<div class="profile-dropdown">
+						<button class="profile-button" onclick="toggleProfileMenu()" aria-haspopup="true" aria-expanded="false">
+							<span class="profile-initial">👤</span>
+						</button>
+						<div id="profile-menu" class="profile-menu" role="menu" aria-hidden="true">
+							<div class="profile-menu-header">
+								<div class="profile-menu-avatar">G</div>
+								<div class="profile-menu-name">Guest</div>
+								<div class="profile-menu-email"></div>
+								<div class="profile-menu-member" style="margin-top:6px;color:var(--text-secondary);font-size:0.9rem;"></div>
+							</div>
+							<div class="profile-menu-row">
+								<button class="btn btn-secondary profile-menu-logout" style="width:100%">Logout</button>
+							</div>
+						</div>
+					</div>
+					<button class="theme-toggle">
+						<span class="theme-icon">🌙</span>
+					</button>
+					<!-- Logout moved into profile dropdown -->
+				</div>
+			</div>
+		</nav>
+
+		<main style="padding: 40px; width: 100%">
+			<div
+				style="
+					background: var(--card-bg);
+					padding: 40px;
+					border-radius: 12px;
+					box-shadow: var(--shadow-md);
+					text-align: center;
+				">
+				<h1 style="margin-bottom: 20px; color: var(--text-primary)">
+					Welcome to G7 Finance! 🎉
+				</h1>
+				<p
+					id="welcome-message"
+					style="
+						font-size: 1.2rem;
+						color: var(--text-secondary);
+						margin-bottom: 30px;
+					">
+					Loading user info...
+				</p>
+
+				<div
+					style="
+						margin-top: 40px;
+						padding: 30px;
+						background: var(--bg-primary);
+						border-radius: 8px;
+					">
+					<h2 style="margin-bottom: 20px">Quick Stats</h2>
+					<div
+						style="
+							display: grid;
+							grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+							gap: 20px;
+							margin-top: 20px;
+						">
+						<div
+							style="
+								padding: 20px;
+								background: var(--card-bg);
+								border-radius: 8px;
+							">
+							<p style="color: var(--text-secondary); margin-bottom: 10px; text-align: center;">
+								Total Balance
+							</p>
+							<h3
+								id="total-balance"
+								style="color: var(--primary-color); font-size: 2rem; margin: 0; text-align: center;">
+								$0.00
+							</h3>
+						</div>
+						<div
+							style="
+								padding: 20px;
+								background: var(--card-bg);
+								border-radius: 8px;
+							">
+							<p style="color: var(--text-secondary); margin-bottom: 10px">
+								Gains/Losses
+							</p>
+							<h3
+								id="gains-losses"
+								style="color: var(--success-color); font-size: 2rem">
+								$0.00
+							</h3>
+						</div>
+					</div>
+				</div>
+
+				<div
+					style="
+						margin-top: 40px;
+						padding: 30px;
+						border-radius: 8px;
+					">
+					<h2 style="margin-bottom: 20px">Trending Assets</h2>
+					<div
+						id="trending-assets"
+						style="
+							overflow-x: auto;
+							margin-top: 20px;
+						">
+						<p style="color: var(--text-secondary)">Loading trending assets...</p>
+					</div>
+				</div>
+
+				<!-- Comments Section -->
+				<div
+					style="
+						margin-top: 40px;
+						padding: 30px;
+						background: var(--bg-primary);
+						border-radius: 8px;
+					">
+					<h2 style="margin-bottom: 20px">Community Comments</h2>
+					
+					<!-- Comment Form -->
+					<div
+						style="
+							padding: 20px;
+							background: var(--card-bg);
+							border-radius: 8px;
+							margin-bottom: 30px;
+						">
+						<h3 style="margin-bottom: 15px; font-size: 1.1rem;">Share your thoughts</h3>
+						<textarea
+							id="comment-input"
+							placeholder="Write a comment..."
+							style="
+								width: 100%;
+								min-height: 100px;
+								padding: 12px;
+								border: 1px solid var(--border-color);
+								border-radius: 6px;
+								background: var(--bg-secondary);
+								color: var(--text-primary);
+								font-family: inherit;
+								font-size: 0.95rem;
+								resize: vertical;
+								box-sizing: border-box;
+							"></textarea>
+						<div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+							<button
+								id="post-comment-btn"
+								class="btn btn-primary"
+								style="padding: 10px 24px;">
+								Post Comment
+							</button>
+						</div>
+					</div>
+					
+				<!-- Comments List -->
+				<div id="comments-container" style="text-align: left;">
+					<p style="color: var(--text-secondary); text-align: center;">Loading comments...</p>
+				</div>
+				</div>
+		</main>
+
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="../scripts/dark-mode.js"></script>
+		<script src="../scripts/main.js"></script>
+		<script>
+			// Load user data from localStorage
+			const userId = localStorage.getItem('user_id');
+			const userName = localStorage.getItem('user_name');
+			const userEmail = localStorage.getItem('user_email');
+
+			console.log('Dashboard loaded for user:', {
+				userId,
+				userName,
+				userEmail,
+			});
+
+			// Check if user is logged in, redirect to login if not
+			if (!userId) {
+				alert('Please log in to access the dashboard');
+				window.location.href = 'login.html';
+			}
+
+			// Seed trending assets on dashboard load
+			function seedTrendingAssets() {
+				console.log('Fetching trending assets...');
+				fetch('/api/assets/trending')
+					.then((r) => r.json())
+					.then((data) => {
+						console.log('Trending assets response:', data);
+						if (data.success && data.data) {
+							displayTrendingAssets(data.data);
+						} else {
+							console.warn('No trending assets found');
+						}
+					})
+					.catch((err) => {
+						console.error('Error fetching trending assets:', err);
+					});
+			}
+
+			// Display trending assets on the dashboard
+			function displayTrendingAssets(assets) {
+				const container = document.getElementById('trending-assets');
+				container.innerHTML = ''; // Clear loading message
+
+				if (!assets || assets.length === 0) {
+					container.innerHTML = '<p style="color: var(--text-secondary)">No trending assets found</p>';
+					return;
+				}
+
+				// Create grid of charts
+				const grid = document.createElement('div');
+				grid.style.cssText = `
+					display: grid;
+					grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+					gap: 20px;
+					margin-top: 20px;
+				`;
+
+				// Add chart for each asset
+				assets.forEach((asset, index) => {
+					const price = asset.current_price ? parseFloat(asset.current_price) : 0;
+					const change24hPercent = asset.price_change_24h ? parseFloat(asset.price_change_24h) : 0;
+					const isPositive = change24hPercent >= 0;
+					const bgColor = isPositive ? 'rgba(76, 175, 80, 0.08)' : 'rgba(244, 67, 54, 0.08)';
+					
+					const card = document.createElement('div');
+					card.style.cssText = `
+						padding: 20px;
+						background: ${bgColor};
+						border-radius: 8px;
+						box-shadow: var(--shadow-md);
+						transition: all 0.2s ease;
+						cursor: pointer;
+						border-left: 4px solid ${isPositive ? 'var(--success-color)' : 'var(--danger-color)'};
+					`;
+					card.onmouseover = () => {
+						card.style.transform = 'translateY(-5px)';
+						card.style.boxShadow = 'var(--shadow-lg)';
+					};
+					card.onmouseout = () => {
+						card.style.transform = 'translateY(0)';
+						card.style.boxShadow = 'var(--shadow-md)';
+					};
+
+					// Calculate dollar change: price * (percentage / 100)
+					const change24hDollar = price * (change24hPercent / 100);
+					
+				const changeColor = isPositive ? 'var(--success-color)' : 'var(--danger-color)';
+				const changeSign = isPositive ? '+' : '';
+				const arrow = isPositive ? '↑' : '↓';
+				const typeLabel = asset.asset_type === 'stock' ? 'Stock' : 'Crypto';
+					const typeBadgeColor = asset.asset_type === 'stock' ? '#4a90e2' : '#f5a623';
+
+					card.innerHTML = `
+						<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+							<div style="flex: 1;">
+								<h3 style="margin: 0; color: var(--primary-color); font-size: 1.3rem; line-height: 1.2;">
+									${asset.ticker_symbol}
+								</h3>
+								<p style="margin: 3px 0 0 0; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.3;">
+									${asset.name}
+								</p>
+							</div>
+							<span style="
+								display: inline-block;
+								padding: 4px 12px;
+								border-radius: 20px;
+								background-color: ${typeBadgeColor};
+								color: white;
+								font-size: 0.8rem;
+								font-weight: 600;
+							">${typeLabel}</span>
+						</div>
+						<div style="margin-bottom: 15px;">
+							<div style="display: flex; justify-content: space-between; align-items: center;">
+								<span style="color: var(--text-secondary); font-size: 0.9rem;">Price</span>
+								<span style="color: var(--text-primary); font-weight: 600; font-size: 1.3rem;">$${price.toFixed(2)}</span>
+							</div>
+						<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px;">
+							<span style="color: var(--text-secondary); font-size: 0.9rem;">24h Change</span>
+							<span style="color: ${changeColor}; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+								<span style="font-size: 1.2rem;">${arrow}</span>
+								<span>${changeSign}$${Math.abs(change24hDollar).toFixed(2)} (${Math.abs(change24hPercent).toFixed(2)}%)</span>
+							</span>
+						</div>
+					`;
+
+					grid.appendChild(card);
+				});
+
+				container.appendChild(grid);
+			}
+
+			// Generate and display chart for asset
+			function generateAssetChart(asset, index) {
+				// Destroy existing chart if any
+				const canvasId = `chart-${index}`;
+				const ctx = document.getElementById(canvasId);
+				if (!ctx) return;
+
+				if (window[`assetChart_${index}`]) {
+					window[`assetChart_${index}`].destroy();
+				}
+
+				// Get computed color values from CSS variables
+				const style = getComputedStyle(document.documentElement);
+				const textPrimaryColor = style.getPropertyValue('--text-primary').trim();
+				const textSecondaryColor = style.getPropertyValue('--text-secondary').trim();
+				const borderColor = style.getPropertyValue('--border-color').trim();
+
+				const currentPrice = parseFloat(asset.current_price) || 100;
+				const change24h = parseFloat(asset.price_change_24h) || 0;
+				
+				// Calculate price from 24 hours ago based on current price and 24h change
+				const price24hAgo = currentPrice / (1 + change24h / 100);
+				
+				// Generate 24 hourly data points from 24h ago to now
+				const labels = [];
+				const prices = [];
+				
+				for (let i = 0; i <= 24; i++) {
+					// Create hourly labels (show every 4 hours for readability)
+					if (i === 0) labels.push('24h ago');
+					else if (i === 24) labels.push('Now');
+					else if (i % 4 === 0) labels.push(`${24-i}h ago`);
+					else labels.push('');
+					
+					// Linear progression from 24h ago price to current price
+					const price = price24hAgo + (currentPrice - price24hAgo) * (i / 24);
+					prices.push(parseFloat(price.toFixed(2)));
+				}
+
+				// Determine colors based on 24h trend
+				const isPositive = change24h >= 0;
+				const lineColor = isPositive ? '#10b981' : '#ef4444';
+				const backgroundColor = isPositive ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+
+				window[`assetChart_${index}`] = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: labels,
+						datasets: [{
+							label: 'Price (USD)',
+							data: prices,
+							borderColor: lineColor,
+							backgroundColor: backgroundColor,
+							fill: true,
+							tension: 0.4,
+							borderWidth: 2,
+							pointRadius: 3,
+							pointBackgroundColor: lineColor,
+							pointBorderColor: '#fff',
+							pointBorderWidth: 1,
+							pointHoverRadius: 5
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							legend: {
+								display: false
+							},
+							tooltip: {
+								backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card-bg').trim(),
+								titleColor: textPrimaryColor,
+								bodyColor: textPrimaryColor,
+								borderColor: borderColor,
+								borderWidth: 1,
+								padding: 8,
+								displayColors: false,
+								callbacks: {
+									label: function(context) {
+										return '$' + context.parsed.y.toFixed(2);
+									}
+								}
+							}
+						},
+						scales: {
+							y: {
+								beginAtZero: false,
+								grid: {
+									color: borderColor,
+									drawBorder: false
+								},
+								ticks: {
+									color: textSecondaryColor,
+									font: { size: 10 },
+									callback: function(value) {
+										return '$' + value.toFixed(0);
+									}
+								}
+							},
+							x: {
+								grid: {
+									display: false
+								},
+								ticks: {
+									color: textSecondaryColor,
+									font: { size: 10 }
+								}
+							}
+						}
+					}
+				});
+			}
+
+			// Call seed on page load
+			seedTrendingAssets();
+
+			// Display welcome message
+			if (userName) {
+				document.getElementById(
+					'welcome-message'
+				).textContent = `Hello, ${userName}!`;
+			} else {
+				document.getElementById('welcome-message').textContent =
+					'Loading...';
+			}
+
+			// Fetch user data and portfolio data from API
+			if (userId) {
+				// Fetch user basic info
+				Promise.all([
+					fetch(`/api/users/${userId}`).then(r => r.json()),
+					fetch(`/api/personal-assets?user_id=${userId}`).then(r => r.json())
+				])
+				.then(([userData, portfolioData]) => {
+					console.log('User data from API:', userData);
+					console.log('Portfolio data from API:', portfolioData);
+					
+					if (userData.success) {
+						const user = userData.data;
+						const cashBalance = user.money_total || 0;
+						
+						// Calculate total portfolio value (cash + investments)
+						let investmentValue = 0;
+						let totalInvested = 0;
+						
+						if (portfolioData.success && portfolioData.data) {
+							portfolioData.data.forEach(asset => {
+								investmentValue += asset.total_value || 0;
+								totalInvested += (asset.quantity * asset.purchase_price) || 0;
+							});
+						}
+						
+						const totalBalance = cashBalance + investmentValue;
+						const gainsLosses = investmentValue - totalInvested;
+						
+						// Update Total Balance
+						document.getElementById('total-balance').textContent = 
+							`$${totalBalance.toFixed(2)}`;
+						
+						// Update Gains/Losses with color coding
+						const gainsLossesEl = document.getElementById('gains-losses');
+						gainsLossesEl.textContent = `$${gainsLosses.toFixed(2)}`;
+						gainsLossesEl.style.color = gainsLosses >= 0 
+							? 'var(--success-color)' 
+							: 'var(--danger-color)';
+						
+						console.log('Dashboard summary:', {
+							cashBalance: cashBalance.toFixed(2),
+							investmentValue: investmentValue.toFixed(2),
+							totalBalance: totalBalance.toFixed(2),
+							totalInvested: totalInvested.toFixed(2),
+							gainsLosses: gainsLosses.toFixed(2)
+						});
+					}
+				})
+				.catch((err) => {
+					console.error('Error fetching dashboard data:', err);
+				});
+			}
+
+			// Add money function
+			
+				
+			
+
+
+			console.log('✓ Dashboard script loaded');
+
+			// ============================================================================
+			// Comments Functionality
+			// ============================================================================
+
+			// Load comments on page load
+			function loadComments() {
+				fetch('/api/comments')
+					.then(r => r.json())
+					.then(data => {
+						console.log('Comments loaded:', data);
+						if (data.success) {
+							displayComments(data.data);
+						} else {
+							document.getElementById('comments-container').innerHTML = 
+								'<p style="color: var(--text-secondary); text-align: center;">Failed to load comments</p>';
+						}
+					})
+					.catch(err => {
+						console.error('Error loading comments:', err);
+						document.getElementById('comments-container').innerHTML = 
+							'<p style="color: var(--text-secondary); text-align: center;">Error loading comments</p>';
+					});
+			}
+
+			// Display comments in the UI
+			function displayComments(comments) {
+				const container = document.getElementById('comments-container');
+				
+				if (!comments || comments.length === 0) {
+					container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No comments yet. Be the first to share your thoughts on the trending stocks!</p>';
+					return;
+				}
+
+				container.innerHTML = comments.map(comment => {
+					const date = new Date(comment.created_at);
+					const timeAgo = getTimeAgo(date);
+					const isOwnComment = comment.user_id == userId;
+					
+					return `
+						<div style="
+							padding: 15px;
+							background: var(--card-bg);
+							border-radius: 6px;
+							margin-bottom: 12px;
+							border-left: 3px solid var(--primary-color);
+							text-align: left;
+						">
+							<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 6px;">
+								<strong style="color: var(--text-primary); font-size: 0.95rem;">
+									${escapeHtml(comment.user_name)}
+								</strong>
+								${isOwnComment ? `
+									<button
+										onclick="deleteComment('${comment._id}')"
+										style="
+											background: none;
+											border: none;
+											color: var(--danger-color);
+											cursor: pointer;
+											font-size: 0.85rem;
+											padding: 0;
+											text-decoration: underline;
+										"
+										title="Delete comment">
+										Delete
+									</button>
+								` : ''}
+							</div>
+							<div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start;">
+								<span style="color: var(--text-secondary); font-size: 0.8rem;">
+									${timeAgo}
+								</span>
+								<span style="color: var(--text-primary); line-height: 1.5;">
+									${escapeHtml(comment.comment_text)}
+								</span>
+							</div>
+						</div>
+					`;
+				}).join('');
+			}
+
+			// Post a new comment
+			document.getElementById('post-comment-btn').addEventListener('click', function() {
+				const commentText = document.getElementById('comment-input').value.trim();
+				
+				if (!commentText) {
+					alert('Please write a comment before posting');
+					return;
+				}
+
+				if (!userId || !userName) {
+					alert('You must be logged in to post comments');
+					return;
+				}
+
+				// Disable button while posting
+				const btn = this;
+				btn.disabled = true;
+				btn.textContent = 'Posting...';
+
+				fetch('/api/comments', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						user_id: userId,
+						user_name: userName,
+						comment_text: commentText
+					})
+				})
+				.then(r => r.json())
+				.then(data => {
+					console.log('Comment posted:', data);
+					if (data.success) {
+						document.getElementById('comment-input').value = '';
+						loadComments(); // Reload comments
+						// Scroll to comments section
+						document.getElementById('comments-container').scrollIntoView({ 
+							behavior: 'smooth',
+							block: 'nearest'
+						});
+					} else {
+						alert('Failed to post comment: ' + (data.error || 'Unknown error'));
+					}
+				})
+				.catch(err => {
+					console.error('Error posting comment:', err);
+					alert('Error posting comment. Please try again.');
+				})
+				.finally(() => {
+					btn.disabled = false;
+					btn.textContent = 'Post Comment';
+				});
+			});
+
+			// Delete a comment
+			function deleteComment(commentId) {
+				if (!confirm('Are you sure you want to delete this comment?')) {
+					return;
+				}
+
+				fetch(`/api/comments/${commentId}`, {
+					method: 'DELETE'
+				})
+				.then(r => r.json())
+				.then(data => {
+					if (data.success) {
+						loadComments(); // Reload comments
+					} else {
+						alert('Failed to delete comment: ' + (data.error || 'Unknown error'));
+					}
+				})
+				.catch(err => {
+					console.error('Error deleting comment:', err);
+					alert('Error deleting comment. Please try again.');
+				});
+			}
+
+			// Helper: Calculate time ago
+			function getTimeAgo(date) {
+				const seconds = Math.floor((new Date() - date) / 1000);
+				
+				const intervals = {
+					year: 31536000,
+					month: 2592000,
+					week: 604800,
+					day: 86400,
+					hour: 3600,
+					minute: 60
+				};
+				
+				for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+					const interval = Math.floor(seconds / secondsInUnit);
+					if (interval >= 1) {
+						return interval === 1 ? `1 ${unit} ago` : `${interval} ${unit}s ago`;
+					}
+				}
+				
+				return 'just now';
+			}
+
+			// Helper: Escape HTML to prevent XSS
+			function escapeHtml(text) {
+				const div = document.createElement('div');
+				div.textContent = text;
+				return div.innerHTML;
+			}
+
+			// Load comments on page load
+			loadComments();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--
+  G7 Finance Database Site
+  © 2024 G7 Finance. All rights reserved.
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Sign Up - G7 Finance</title>
+		<link
+			rel="stylesheet"
+			href="styles.css" />
+
+		<script>
+			(function () {
+				const theme = localStorage.getItem('theme') || 'light';
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
+	</head>
+
+	<body class="auth-page">
+		<script>
+			// Prevent logged-in users from visiting login/signup
+			const uid = localStorage.getItem('user_id');
+			if (uid) {
+				window.location.href = 'dashboard.html';
+			}
+		</script>
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="logo">G7 Finance</div>
+				<div class="nav-links">
+					<a href="index.html">Home</a>
+					<a href="login.html">Login</a>
+					<button class="theme-toggle">
+						<span class="theme-icon">🌙</span>
+					</button>
+				</div>
+			</div>
+		</nav>
+
+		<main class="auth-main">
+			<div class="auth-container">
+				<div class="auth-card">
+					<h1>Create Account</h1>
+					<p class="auth-subtitle">Join G7 Finance to manage your portfolio</p>
+
+					<form
+						class="auth-form"
+						id="signupForm">
+						<div class="form-group">
+							<label for="name">Full Name</label>
+							<input
+								type="text"
+								id="name"
+								name="name"
+								required />
+						</div>
+
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								required />
+						</div>
+
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input
+								type="password"
+								id="password"
+								name="password"
+								required />
+						</div>
+
+						<div class="form-group">
+							<label for="confirm-password">Confirm Password</label>
+							<input
+								type="password"
+								id="confirm-password"
+								name="confirm-password"
+								required />
+							<small
+								id="password-error"
+								style="color: var(--danger-color); display: none"
+								>Passwords do not match</small
+							>
+						</div>
+
+						<button
+							type="button"
+							class="btn btn-primary btn-full"
+							onclick="handleSignup()">
+							Sign Up
+						</button>
+					</form>
+
+					<div class="auth-footer">
+						<p>Already have an account? <a href="login.html">Sign in</a></p>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<script src="../scripts/dark-mode.js"></script>
+		<script>
+			// Real-time password matching feedback
+			const confirmPasswordInput = document.getElementById('confirm-password');
+			const passwordInput = document.getElementById('password');
+			const passwordError = document.getElementById('password-error');
+
+			confirmPasswordInput.addEventListener('input', function () {
+				if (passwordInput.value !== confirmPasswordInput.value) {
+					passwordError.style.display = 'block';
+					confirmPasswordInput.setCustomValidity('Passwords do not match');
+				} else {
+					passwordError.style.display = 'none';
+					confirmPasswordInput.setCustomValidity('');
+				}
+			});
+
+			// Handle signup button click
+			function handleSignup() {
+				console.log('🔘 Sign Up button clicked');
+
+				const name = document.getElementById('name').value.trim();
+				const email = document.getElementById('email').value.trim();
+				const password = document.getElementById('password').value;
+				const confirmPassword =
+					document.getElementById('confirm-password').value;
+
+				console.log('Form data:', {
+					name,
+					email,
+					password: '***',
+					confirmPassword: '***',
+				});
+
+				// Validate fields
+				if (!name || !email || !password || !confirmPassword) {
+					alert('Please fill in all fields');
+					console.log('❌ Validation failed: empty fields');
+					return;
+				}
+
+				// Check passwords match
+				if (password !== confirmPassword) {
+					passwordError.style.display = 'block';
+					alert('Passwords do not match!');
+					console.log('❌ Passwords do not match');
+					return;
+				}
+
+				console.log('✓ Validation passed');
+				console.log('🌐 Sending POST request to /api/users...');
+
+				// Call API to create user
+				fetch('/api/users', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ name, email, password }),
+				})
+					.then((response) => {
+						console.log('📡 Response status:', response.status);
+						return response.json();
+					})
+					.then((data) => {
+						console.log('📦 API response:', data);
+						if (data.success) {
+							alert('Account created successfully! Please log in.');
+							console.log('✅ User created with ID:', data.data.user_id);
+							window.location.href = 'login.html';
+						} else {
+							alert('Signup failed: ' + data.error);
+							console.log('❌ Signup failed:', data.error);
+						}
+					})
+					.catch((error) => {
+						console.error('❌ Fetch error:', error);
+						alert('Error: ' + error.message);
+					});
+			}
+
+			// DEBUG: Log when this script runs
+			console.log('✓ signup.html script loaded');
+			console.log('✓ handleSignup function defined');
+		</script>
+	</body>
+</html>

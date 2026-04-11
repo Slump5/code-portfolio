@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+  G7 Finance Database Site
+  © 2024 G7 Finance. All rights reserved.
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>G7 Finance - Landing Page</title>
+		<link rel="stylesheet" href="styles.css" />
+		<script>
+			// Initialize theme before page renders to prevent flash
+			(function () {
+				const theme = localStorage.getItem('theme') || 'light';
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="logo">G7 Finance</div>
+				<div class="nav-links">
+					<a href="index.html" class="active">Home</a>
+            		<a href="login.html">Login</a>
+					<button class="theme-toggle">
+						<span class="theme-icon"></span>
+					</button>
+					<button id="logout-btn" class="btn btn-secondary" style="display:none;">Logout</button>
+				</div>
+			</div>
+		</nav>
+
+		<main class="landing-main">
+			<section class="hero">
+				<div class="hero-content">
+					<h1>Track Your Investments</h1>
+					<p class="hero-subtitle">
+						Manage your stocks, crypto, and portfolio all in one place
+					</p>
+
+					<div class="hero-buttons">
+						<a href="signup.html" class="btn btn-primary">Get Started</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="features">
+				<div class="container">
+					<h2>Features</h2>
+
+					<div class="features-grid">
+
+						<div class="feature-card">
+							<div class="feature-icon">Portfolio</div>
+							<h3>Portfolio Tracking</h3>
+							<p>Monitor your investments in real-time with detailed analytics</p>
+						</div>
+
+						<div class="feature-card">
+							<div class="feature-icon">Favorites</div>
+							<h3>Favorites</h3>
+							<p>Save and track your favorite stocks and cryptocurrencies</p>
+						</div>
+
+						<div class="feature-card">
+							<div class="feature-icon">Charts</div>
+							<h3>Charts & Analytics</h3>
+							<p>Visualize your portfolio performance with interactive charts</p>
+						</div>
+
+						<div class="feature-card">
+							<div class="feature-icon">Search</div>
+							<h3>Search & Filter</h3>
+							<p>Find specific assets and transactions quickly</p>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2024 G7 Finance. All rights reserved.</p>
+			</div>
+		</footer>
+
+		<script src="../scripts/dark-mode.js"></script>
+		<script src="../static/js/main.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				const uid = localStorage.getItem('user_id');
+
+				const loginLink = document.getElementById("login-link");
+				const dashboardLink = document.getElementById("dashboard-link");
+				const logoutBtn = document.getElementById("logout-btn");
+
+				if (uid) {
+					// User is logged in
+					loginLink.style.display = "none";
+					dashboardLink.style.display = "inline-block";
+					logoutBtn.style.display = "inline-block";
+
+					logoutBtn.onclick = () => {
+						localStorage.clear();
+						window.location.href = "login.html";
+					};
+				} else {
+					// User is logged out
+					dashboardLink.style.display = "none";
+					loginLink.style.display = "inline-block";
+					logoutBtn.style.display = "none";
+				}
+			});
+		</script>
+	</body>
+</html>

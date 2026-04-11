@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--
+  G7 Finance Database Site
+  © 2024 G7 Finance. All rights reserved.
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Login - G7 Finance</title>
+		<link
+			rel="stylesheet"
+			href="styles.css" />
+
+		<script>
+			(function () {
+				const theme = localStorage.getItem('theme') || 'light';
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
+	</head>
+
+	<body class="auth-page">
+		<script>
+			// Prevent logged-in users from visiting login/signup
+			const uid = localStorage.getItem('user_id');
+			if (uid) {
+				window.location.href = 'dashboard.html';
+			}
+		</script>
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="logo">G7 Finance</div>
+				<div class="nav-links">
+					<a href="index.html">Home</a>
+					<a
+						href="login.html"
+						class="active"
+						>Login</a
+					>
+					<button class="theme-toggle">
+						<span class="theme-icon">🌙</span>
+					</button>
+				</div>
+			</div>
+		</nav>
+
+		<main class="auth-main">
+			<div class="auth-container">
+				<div class="auth-card">
+					<h1>Welcome Back</h1>
+					<p class="auth-subtitle">Sign in to access your portfolio</p>
+
+					<form class="auth-form">
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input
+								type="email"
+								id="email"
+								required />
+						</div>
+
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input
+							type="password"
+							id="password"
+							required />
+					</div>
+
+					<button
+							type="button"
+							id="login-btn"
+							class="btn btn-primary btn-full"
+							onclick="handleLogin()">
+							<span class="btn-text">Sign In</span>
+							<span id="login-spinner" class="spinner" style="display:none" aria-hidden="true"></span>
+						</button>
+					</form>
+
+					<div class="auth-footer">
+						<p>Don't have an account? <a href="signup.html">Sign up</a></p>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<script src="../scripts/dark-mode.js"></script>
+		<script>
+			// Handle login button click
+			function handleLogin() {
+				console.log('🔘 Sign In button clicked');
+
+				const email = document.getElementById('email').value.trim();
+				const password = document.getElementById('password').value;
+
+				console.log('Login attempt for email:', email);
+
+				// Validate fields
+				if (!email || !password) {
+					alert('Please fill in all fields');
+					console.log('❌ Validation failed: empty fields');
+					return;
+				}
+
+				// Basic email validation
+				if (!email.includes('@')) {
+					alert('Please enter a valid email address');
+					console.log('❌ Invalid email format');
+					return;
+				}
+
+				console.log('✓ Validation passed');
+				console.log('🌐 Sending POST request to /api/login...');
+
+				// Show loading state
+				const btn = document.getElementById('login-btn');
+				const spinner = document.getElementById('login-spinner');
+				const inputs = [document.getElementById('email'), document.getElementById('password')];
+
+				if (btn) btn.disabled = true;
+				if (spinner) spinner.style.display = 'inline-block';
+				inputs.forEach(i => { if (i) i.disabled = true; });
+
+				// Call API to login
+				fetch('/api/login', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ email, password }),
+				})
+					.then((response) => {
+						console.log('📡 Response status:', response.status);
+						return response.json();
+					})
+					.then((data) => {
+						console.log('📦 API response:', data);
+						if (data.success && data.data.user_id) {
+							console.log('✅ Login successful! User ID:', data.data.user_id);
+
+							// Store user_id in localStorage
+							localStorage.setItem('user_id', data.data.user_id);
+							localStorage.setItem('user_name', data.data.name);
+							localStorage.setItem('user_email', data.data.email);
+
+							alert('Login successful! Welcome ' + data.data.name);
+
+							// Redirect to dashboard
+							window.location.href = 'dashboard.html';
+						} else {
+							alert('Login failed: ' + (data.error || 'Invalid credentials'));
+							console.log('❌ Login failed:', data.error);
+							// hide spinner and re-enable
+							if (btn) btn.disabled = false;
+							if (spinner) spinner.style.display = 'none';
+							inputs.forEach(i => { if (i) i.disabled = false; });
+						}
+					})
+					.catch((error) => {
+						console.error('❌ Fetch error:', error);
+						alert('Error: ' + error.message);
+						// hide spinner and re-enable
+						if (btn) btn.disabled = false;
+						if (spinner) spinner.style.display = 'none';
+						inputs.forEach(i => { if (i) i.disabled = false; });
+					});
+			}
+
+			// Allow Enter key to submit
+			document.addEventListener('DOMContentLoaded', function () {
+				const emailInput = document.getElementById('email');
+				const passwordInput = document.getElementById('password');
+
+				[emailInput, passwordInput].forEach((input) => {
+					input.addEventListener('keypress', function (e) {
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							handleLogin();
+						}
+					});
+				});
+
+				console.log('✓ login.html script loaded');
+				console.log('✓ handleLogin function defined');
+			});
+		</script>
+	</body>
+</html>

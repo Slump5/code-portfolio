@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<!--
+  G7 Finance Database Site
+  © 2024 G7 Finance. All rights reserved.
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Portfolio - G7 Finance</title>
+		<link
+			rel="stylesheet"
+			href="styles.css" />
+		<script>
+			(function () {
+				const theme = localStorage.getItem('theme') || 'light';
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
+	</head>
+	<body>
+		<script>
+			// Block access if not logged in
+			if (!localStorage.getItem('user_id')) {
+				window.location.href = 'login.html';
+			}
+		</script>
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="logo">G7 Finance</div>
+				<div class="nav-links">
+					<a href="dashboard.html">Dashboard</a>
+					<a
+						href="portfolio.html"
+						class="active"
+						>Portfolio</a
+					>
+					<a href="favorites.html">Favorites</a>
+					<div class="profile-dropdown">
+						<button class="profile-button" onclick="toggleProfileMenu()" aria-haspopup="true" aria-expanded="false">
+							<span class="profile-initial">👤</span>
+						</button>
+						<div id="profile-menu" class="profile-menu" role="menu" aria-hidden="true">
+							<div class="profile-menu-header">
+								<div class="profile-menu-avatar">G</div>
+								<div class="profile-menu-name">Guest</div>
+								<div class="profile-menu-email"></div>
+								<div class="profile-menu-member" style="margin-top:6px;color:var(--text-secondary);font-size:0.9rem;"></div>
+							</div>
+							<div class="profile-menu-row">
+								<button class="btn btn-secondary profile-menu-logout" style="width:100%">Logout</button>
+							</div>
+						</div>
+					</div>
+					<button class="theme-toggle">
+						<span class="theme-icon">Theme</span>
+					</button>
+					<!-- Logout moved into profile dropdown -->
+				</div>
+			</div>
+		</nav>
+		<main class="portfolio-main">
+			<div class="container">
+				<div class="page-header">
+					<h1>My Portfolio</h1>
+					<div class="header-actions">
+						<button class="btn btn-primary">Add Asset</button>
+					</div>
+				</div>
+
+				<!-- Portfolio Summary -->
+				<div class="portfolio-summary">
+					<div class="summary-item">
+						<span class="summary-label">Total Value:</span>
+						<span
+							id="summary-total-value"
+							class="summary-value"
+							>$0.00</span
+						>
+					</div>
+					<div class="summary-item">
+						<span class="summary-label">Total Gain/Loss:</span>
+						<span
+							id="summary-total-gain"
+							class="summary-value"
+							>$0.00</span
+						>
+					</div>
+					<div class="summary-item">
+						<span class="summary-label">Total Assets:</span>
+						<span
+							id="summary-total-assets"
+							class="summary-value"
+							>0</span
+						>
+					</div>
+				</div>
+
+				<!-- Portfolio Table -->
+				<div class="portfolio-table-section">
+					<h2>Owned Assets</h2>
+					<div class="table-container">
+						<table class="portfolio-table">
+							<thead>
+								<tr>
+									<th>Symbol</th>
+									<th>Name</th>
+									<th>Type</th>
+									<th>Quantity</th>
+									<th>Current Price</th>
+									<th>Total Value</th>
+									<th>Gain/Loss</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Dynamic rows will be inserted here -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Add Asset Modal -->
+				<div
+					class="modal-overlay"
+					style="display: none">
+					<div class="modal">
+						<div class="modal-header">
+							<h2 class="add-modal-title">Add Asset</h2>
+						</div>
+						<div class="modal-body">
+							<form class="asset-form">
+								<div class="form-group">
+									<label for="asset-symbol">Symbol</label>
+									<select
+										id="asset-symbol"
+										required>
+										<option value="">-- Select Asset --</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="asset-quantity">Quantity</label>
+									<input
+										type="number"
+										id="asset-quantity"
+										step="0.01"
+										required />
+								</div>
+
+								<div class="form-group">
+									<label for="asset-price">Purchase Price</label>
+									<input
+										type="number"
+										id="asset-price"
+										step="0.01"
+										required />
+								</div>
+
+								<div class="form-actions">
+									<button
+										type="submit"
+										class="btn btn-primary">
+										Add Asset
+									</button>
+									<button
+										type="button"
+										class="btn btn-secondary">
+										Cancel
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- EDIT ASSET MODAL -->
+				<div
+					class="edit-overlay"
+					style="display: none"></div>
+				<div
+					class="edit-modal"
+					style="display: none">
+					<div class="modal">
+						<span class="modal-close edit-close">&times;</span>
+						<h2>Edit Asset</h2>
+
+						<form class="edit-asset-form">
+							<div class="form-group">
+								<label>Quantity</label>
+								<input
+									type="number"
+									id="edit-quantity"
+									step="0.01"
+									required />
+							</div>
+
+							<div class="form-group">
+								<label>Purchase Price</label>
+								<input
+									type="number"
+									id="edit-price"
+									step="0.01"
+									required />
+							</div>
+
+							<div class="form-actions">
+								<button
+									type="submit"
+									class="btn btn-primary">
+									Save
+								</button>
+								<button
+									type="button"
+									class="btn btn-danger remove-asset">
+									Remove
+								</button>
+								<button
+									type="button"
+									class="btn btn-secondary edit-cancel">
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- Combined Portfolio Chart -->
+			<div
+				class="portfolio-chart-container"
+				style="margin-top: 40px">
+				<h2 style="text-align: center">Portfolio Allocation</h2>
+				<p
+					id="no-assets-message"
+					style="
+						text-align: center;
+						color: var(--text-muted);
+						font-size: 1rem;
+						margin-top: 10px;
+						display: none;
+					">
+					You currently have no assets in your portfolio.
+				</p>
+				<canvas
+					id="portfolioChart"
+					style="max-height: 400px"></canvas>
+			</div>
+		</main>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const userId = localStorage.getItem('user_id');
+
+				// ========= LOAD ALL ASSETS FOR DROPDOWN =========
+				let allAssets = [];
+				async function loadAllAssets() {
+					try {
+						const res = await fetch('/api/assets/trending');
+						const json = await res.json();
+
+						if (json.success && json.data) {
+							allAssets = json.data;
+							const dropdown = document.getElementById('asset-symbol');
+
+							// Clear existing options except the first one
+							dropdown.innerHTML =
+								'<option value="">-- Select Asset --</option>';
+
+							// Add asset options
+							allAssets.forEach((asset) => {
+								const option = document.createElement('option');
+								option.value = asset.ticker_symbol;
+								option.textContent = `${asset.ticker_symbol} - ${asset.name} (${asset.asset_type})`;
+								option.dataset.assetId = asset.asset_id;
+								option.dataset.currentPrice = asset.current_price;
+								dropdown.appendChild(option);
+							});
+						}
+					} catch (err) {
+						console.error('Error loading assets:', err);
+					}
+				}
+
+				// Load assets on page load
+				loadAllAssets();
+
+				// ========= AUTO-FILL PRICE WHEN ASSET SELECTED =========
+				document
+					.getElementById('asset-symbol')
+					.addEventListener('change', (e) => {
+						const selectedOption = e.target.options[e.target.selectedIndex];
+						const currentPrice = selectedOption.dataset.currentPrice;
+
+						if (currentPrice) {
+							document.getElementById('asset-price').value =
+								parseFloat(currentPrice).toFixed(2);
+						}
+					});
+
+				// ========= OPEN ADD-ASSET MODAL =========
+				document.querySelector('.header-actions .btn-primary').onclick = () => {
+					document.querySelector('.modal-overlay').style.display = 'flex';
+				};
+
+				// ========= CLOSE MODAL (Cancel button) =========
+				document
+					.querySelector('.modal-overlay .btn.btn-secondary')
+					.addEventListener('click', () => {
+						document.querySelector('.modal-overlay').style.display = 'none';
+						// Clear form
+						document.querySelector('.asset-form').reset();
+					});
+
+				// ========= LOOKUP ASSET BY SYMBOL =========
+				async function lookupAsset(symbol) {
+					const res = await fetch(`/api/assets?symbol=${symbol}`);
+					return await res.json();
+				}
+
+				// ========= ADD ASSET FORM SUBMIT =========
+				document.querySelector('.asset-form').onsubmit = async (e) => {
+					e.preventDefault();
+
+					const dropdown = document.getElementById('asset-symbol');
+					const selectedOption = dropdown.options[dropdown.selectedIndex];
+
+					if (!selectedOption.value) {
+						alert('Please select an asset!');
+						return;
+					}
+
+					const asset_id = selectedOption.dataset.assetId;
+					const quantity = parseFloat(
+						document.getElementById('asset-quantity').value
+					);
+					const price = parseFloat(
+						document.getElementById('asset-price').value
+					);
+
+					const res = await fetch('/api/personal-assets', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							user_id: userId,
+							asset_id: asset_id,
+							quantity: quantity,
+							purchase_price: price,
+						}),
+					});
+
+					const json = await res.json();
+					if (json.success) {
+						alert('Asset added successfully!');
+						location.reload();
+					} else {
+						alert('Error: ' + json.error);
+					}
+				};
+
+				// ========= LOAD REAL USER PORTFOLIO =========
+				async function loadPortfolio() {
+					const res = await fetch(`/api/personal-assets?user_id=${userId}`);
+					const json = await res.json();
+
+					const tbody = document.querySelector('.portfolio-table tbody');
+					tbody.innerHTML = '';
+
+					json.data.forEach((row) => {
+						tbody.innerHTML += `
+						<tr data-id="${row.personal_asset_id}">
+							<td><strong>${row.ticker_symbol}</strong></td>
+							<td>${row.asset_name}</td>
+							<td><span class="badge badge-${row.asset_type}">${row.asset_type.charAt(0).toUpperCase() + row.asset_type.slice(1)}</span></td>
+							<td>${row.quantity}</td>
+							<td>$${row.current_price.toFixed(2)}</td>
+							<td>$${row.total_value.toFixed(2)}</td>
+							<td style="color: ${
+								row.gain_loss >= 0
+									? 'var(--success-color)'
+									: 'var(--danger-color)'
+							}; font-weight: 600;">
+								${row.gain_loss >= 0 ? '+' : ''}$${row.gain_loss.toFixed(2)}
+							</td>
+							<td><button class="btn-icon edit-btn">Edit</button></td>
+						</tr>`;
+					});
+				}
+				// ========= EDIT BUTTON HANDLERS =========
+
+				let currentEditId = null;
+
+				// CLICK EDIT BUTTON
+				document.addEventListener('click', (e) => {
+					if (e.target.classList.contains('edit-btn')) {
+						const tr = e.target.closest('tr');
+						currentEditId = tr.dataset.id; // personal_asset_id
+
+						const quantity = tr.children[3].textContent.trim();
+						const price = tr.children[4].textContent.replace('$', '').trim();
+
+						document.getElementById('edit-quantity').value = quantity;
+						document.getElementById('edit-price').value = price;
+						document.querySelector('.edit-overlay').style.display = 'block';
+
+						document.querySelector('.edit-modal').style.display = 'flex';
+					}
+				});
+
+				function closeEditModal() {
+					document.querySelector('.edit-overlay').style.display = 'none';
+					document.querySelector('.edit-modal').style.display = 'none';
+				}
+
+				document.querySelector('.edit-close').onclick = closeEditModal;
+				document.querySelector('.edit-cancel').onclick = closeEditModal;
+
+				// SAVE EDIT
+				document.querySelector('.edit-asset-form').onsubmit = async (e) => {
+					e.preventDefault();
+
+					const quantity = parseFloat(
+						document.getElementById('edit-quantity').value
+					);
+					const price = parseFloat(document.getElementById('edit-price').value);
+
+					const res = await fetch('/api/personal-assets', {
+						method: 'PUT',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							personal_asset_id: currentEditId,
+							quantity: quantity,
+							purchase_price: price,
+						}),
+					});
+
+					const json = await res.json();
+
+					if (json.success) {
+						alert('Asset updated!');
+						location.reload();
+					}
+				};
+				// ========= REMOVE ASSET =========
+				document.querySelector('.remove-asset').onclick = async () => {
+					if (!confirm('Are you sure you want to remove this asset?')) return;
+
+					const res = await fetch('/api/personal-assets', {
+						method: 'DELETE',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							personal_asset_id: currentEditId,
+						}),
+					});
+
+					const json = await res.json();
+
+					if (json.success) {
+						alert('Asset removed!');
+						location.reload();
+					} else {
+						alert('Error removing asset.');
+					}
+				};
+
+				// ========= BUILD PIE CHART (Based on Total Value) =========
+				async function loadPortfolioChart() {
+					const res = await fetch(`/api/personal-assets?user_id=${userId}`);
+					const json = await res.json();
+
+					const labels = json.data.map((a) => a.ticker_symbol);
+					const values = json.data.map((a) => a.total_value);
+
+					// === If no assets, show message and hide chart ===
+					if (labels.length === 0) {
+						document.getElementById('portfolioChart').style.display = 'none';
+						document.getElementById('no-assets-message').style.display =
+							'block';
+						return;
+					}
+
+					// === If assets exist, show chart and hide empty message ===
+					document.getElementById('portfolioChart').style.display = 'block';
+					document.getElementById('no-assets-message').style.display = 'none';
+
+					new Chart(document.getElementById('portfolioChart'), {
+						type: 'pie',
+						data: {
+							labels: labels,
+							datasets: [
+								{
+									data: values,
+									backgroundColor: [
+										'#1565c0',
+										'#4caf50',
+										'#f44336',
+										'#ff9800',
+										'#9c27b0',
+										'#03a9f4',
+										'#8bc34a',
+									],
+								},
+							],
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: true,
+							plugins: {
+								legend: {
+									display: true,
+									position: 'bottom',
+								},
+								tooltip: {
+									callbacks: {
+										label: function (context) {
+											const label = context.label || '';
+											const value = context.parsed || 0;
+											const total = values.reduce((sum, v) => sum + v, 0);
+											const percentage = ((value / total) * 100).toFixed(1);
+											return `${label}: $${value.toFixed(2)} (${percentage}%)`;
+										},
+									},
+								},
+							},
+						},
+					});
+				}
+
+				async function updateSummary() {
+					const res = await fetch(`/api/personal-assets?user_id=${userId}`);
+					const json = await res.json();
+
+					let totalValue = 0;
+					let totalGain = 0;
+					let totalAssets = json.data.length;
+
+					json.data.forEach((a) => {
+						totalValue += a.total_value;
+						totalGain += a.gain_loss;
+					});
+
+					// Update DOM
+					document.getElementById(
+						'summary-total-value'
+					).textContent = `$${totalValue.toFixed(2)}`;
+
+					const gainEl = document.getElementById('summary-total-gain');
+					gainEl.textContent = `${
+						totalGain >= 0 ? '+' : ''
+					}$${totalGain.toFixed(2)}`;
+					gainEl.style.color =
+						totalGain >= 0 ? 'var(--success-color)' : 'var(--danger-color)';
+					gainEl.style.fontWeight = '600';
+
+					document.getElementById('summary-total-assets').textContent =
+						totalAssets;
+				}
+
+				// Initialize Page
+				loadPortfolio();
+				loadPortfolioChart();
+				updateSummary();
+			});
+
+
+		</script>
+		<script src="../scripts/dark-mode.js"></script>
+		<script src="../scripts/main.js"></script>
+	</body>
+</html>
