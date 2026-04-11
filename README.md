@@ -30,7 +30,7 @@ A live multi-page business website developed for a real-world service company, f
 
 **Tech Stack:** HTML, CSS, JavaScript
 
-🌐 **Live Site:** https://royalwindowcleaninginc.com/
+🌐 **Live Site:** https://royalwindowcleaninginc.com/  
 📁 Location: `html-php-projects/royal-window-cleaning-live-site`
 
 ## 📂 Project Categories
