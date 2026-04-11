@@ -8,11 +8,11 @@ A collection of my programming projects across multiple languages and technologi
 A full-stack financial portfolio management application built with Flask, SQLite, MongoDB, and external APIs.
 
 **Features:**
-- User authentication and session handling
-- Portfolio tracking with gain/loss calculations
-- Favorites system with live charts
-- Real-time stock and crypto data (Finnhub & CoinGecko)
-- Interactive dashboard and analytics
+- User authentication and session management
+- Real-time portfolio tracking with gain/loss calculations
+- Favorites system with dynamic mini charts and caching
+- Live stock and cryptocurrency data integration (Finnhub & CoinGecko APIs)
+- Interactive dashboard with data visualization and analytics
 
 📁 Location: `fullstack-projects/finance-portfolio-app`
 
