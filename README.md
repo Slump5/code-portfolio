@@ -2,7 +2,7 @@
 
 A collection of my programming projects across multiple languages and technologies.
 
-## ⭐ Featured Project
+## ⭐ Featured Projects
 
 ### Finance Portfolio App
 A full-stack financial portfolio management application built with Flask, SQLite, MongoDB, and external APIs.
@@ -15,6 +15,19 @@ A full-stack financial portfolio management application built with Flask, SQLite
 - Interactive dashboard with data visualization and analytics
 
 📁 Location: `fullstack-projects/finance-portfolio-app`
+
+### Royal Window Cleaning Website
+A live multi-page business website developed for a real-world service company, featuring responsive design, structured navigation, and production-ready deployment.
+
+**Features:**
+- Fully responsive multi-page layout
+- Service-specific pages (window cleaning, gutter cleaning, pressure washing, etc.)
+- Contact and FAQ pages for customer interaction
+- Clean UI with organized assets and optimized file structure
+- Deployed and actively used in a real business environment
+
+🌐 Live Site: https://royalwindowcleaninginc.com/  
+📁 Location: `html-php-projects/royal-window-cleaning-live-site`
 
 ## 📂 Project Categories
 
