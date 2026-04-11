@@ -1,6 +1,6 @@
 # Thomas Hoerger's Code Portfolio
 
-A collection of my programming projects across multiple languages and technologies.
+A collection of my programming projects across multiple languages, frameworks, and technologies.
 
 ## ⭐ Featured Projects
 
