@@ -14,6 +14,8 @@ A full-stack financial portfolio management application built with Flask, SQLite
 - Live stock and cryptocurrency data integration (Finnhub & CoinGecko APIs)
 - Interactive dashboard with data visualization and analytics
 
+**Tech Stack:** Flask, SQLite, MongoDB, JavaScript, Chart.js
+
 📁 Location: `fullstack-projects/finance-portfolio-app`
 
 ### Royal Window Cleaning Website
@@ -26,7 +28,9 @@ A live multi-page business website developed for a real-world service company, f
 - Clean UI with organized assets and optimized file structure
 - Deployed and actively used in a real business environment
 
-🌐 Live Site: https://royalwindowcleaninginc.com/  
+**Tech Stack:** HTML, CSS, JavaScript
+
+🌐 **Live Site:** https://royalwindowcleaninginc.com/
 📁 Location: `html-php-projects/royal-window-cleaning-live-site`
 
 ## 📂 Project Categories
