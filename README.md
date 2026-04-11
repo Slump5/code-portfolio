@@ -18,6 +18,8 @@ A full-stack financial portfolio management application built with Flask, SQLite
 
 📁 Location: `fullstack-projects/finance-portfolio-app`
 
+<br>
+
 ### Royal Window Cleaning Website
 A live multi-page business website developed for a real-world service company, featuring responsive design, structured navigation, and production-ready deployment.
 
