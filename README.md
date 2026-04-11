@@ -2,8 +2,6 @@
 
 A collection of my programming projects across multiple languages and technologies.
 
----
-
 ## ⭐ Featured Project
 
 ### Finance Portfolio App
@@ -18,8 +16,6 @@ A full-stack financial portfolio management application built with Flask, SQLite
 
 📁 Location: `fullstack-projects/finance-portfolio-app`
 
----
-
 ## 📂 Project Categories
 
 - [**ASM Projects**](./asm-projects)
@@ -32,5 +28,5 @@ A full-stack financial portfolio management application built with Flask, SQLite
 - [**R Projects**](./r-projects)
 - [**React Native Projects**](./react-native-app-projects)
 - [**Rust Projects**](./rust-projects)
-
+  
 Each folder contains a separate project with its own `README.md` explaining functionality and implementation details.
