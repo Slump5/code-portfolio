@@ -28,8 +28,8 @@ Skyview is a PHP-based web application designed for interactively viewing weathe
 - **weather_ui.php:** Main application interface for dynamic table selection and display, with session-based access control.
 - **weather_ui.php.save:** Backup version of `weather_ui.php` with slightly different styling.
 - **composer.json / composer.lock:** Manages dependencies for the Google API Client Library.
-- **powerpoint-final-weather-database-viewer-site-and-app.pptx:** Presentation outlining project development steps.
-- **documentation-final-weather-database-viewer-site-and-app.pdf:** Documentation summarizing project implementation.
+- **presentation.pptx:** Presentation outlining project development steps.
+- **project-report.pdf:** Includes implementation details, system design decisions, and screenshots demonstrating application functionality and features.
 - **instructions.pdf:** Project requirements and objectives from Dr. Adriano Cavalcanti.
 - **presentation-final-weather-database-viewer-site-and-app.mkv:** Video presentation of the project (not included in code but referenced).
 
