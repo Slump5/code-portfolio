@@ -1,4 +1,4 @@
-# Group Docker Project
+# Docker Distributed System
 
 ## Overview
 This is a Docker-based distributed system deployment for a midterm project. It sets up containers for NGINX (as a reverse proxy), Spark (for data processing), and Rust (for client-side querying). The system is designed to run on a VPS, with connectivity to a Google Cloud Storage (GCS) data bucket using Delta Lake for data access. Containers communicate internally via a Docker network, and a simple client-side query demonstrates inter-container communication (Rust querying NGINX, which proxies to Spark). The project includes setup scripts, Dockerfiles, configurations, and documentation for installation, building, running, and testing. It also features a Jupyter notebook, text scripts for bucket access, a PowerPoint presentation outlining implementation steps, and a video demo (docker-project-video-demo.mkv). The system handles a sample CSV dataset from the GCS bucket and supports basic HTTP requests for verification.
