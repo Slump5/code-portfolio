@@ -4,6 +4,25 @@ A collection of my programming projects across multiple languages, frameworks, a
 
 ## ⭐ Featured Projects
 
+### 🌤️ SkyView Weather App
+
+A full-stack mobile weather application built using React Native (Expo) for the frontend and PHP/MySQL for the backend, deployed on a cloud VPS.
+
+**Features:**
+- User authentication (login/register)
+- Add, search, and manage weather data
+- Interactive map with real-time geolocation
+- Database visualization with dynamic tables
+- Feedback system with real-time pie chart analytics
+- Smooth mobile UI with animations and swipe navigation
+- Live API integration (OpenWeatherMap)
+
+**Tech Stack:** React Native, PHP, MySQL, JavaScript, Expo, REST APIs, VPS (Ubuntu/Apache)
+
+📁 Location: `fullstack-projects/skyview-weather-app`
+
+<br>
+
 ### 📈 Finance Portfolio App
 A full-stack financial portfolio management application built with Flask, SQLite, MongoDB, and external APIs.
 
@@ -46,4 +65,5 @@ A live multi-page business website developed for a real-world service company, f
 - [**R Projects**](./r-projects)
 - [**System Projects**](./system-projects)
   
-Each folder contains a separate project with its own `README.md` explaining functionality and implementation details.
+📌 Notes
+Each project folder contains its own README.md with detailed explanations, setup instructions, and implementation details.
