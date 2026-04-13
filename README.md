@@ -39,13 +39,11 @@ A live multi-page business website developed for a real-world service company, f
 
 - [**ASM Projects**](./asm-projects)
 - [**C++ Projects**](./cpp-projects)
-- [**C# Projects**](./cs-projects)
 - [**Fullstack Projects**](./fullstack-projects)
 - [**HTML/PHP Projects**](./html-php-projects)
 - [**Lisp Projects**](./lisp-projects)
 - [**Python Projects**](./python-projects)
 - [**R Projects**](./r-projects)
-- [**React Native Projects**](./react-native-app-projects)
-- [**Rust Projects**](./rust-projects)
+- [**System Projects**](./system-projects)
   
 Each folder contains a separate project with its own `README.md` explaining functionality and implementation details.
