@@ -62,7 +62,7 @@ A live multi-page business website developed for a real-world service company, f
 - [**Lisp Projects**](./lisp-projects)
 - [**Python Projects**](./python-projects)
 - [**R Projects**](./r-projects)
-- [**System Projects**](./systems-projects)
+- [**Systems Projects**](./systems-projects)
 - [**Web Projects**](./web-projects)
   
 📌 Notes
