@@ -59,11 +59,11 @@ A live multi-page business website developed for a real-world service company, f
 - [**ASM Projects**](./asm-projects)
 - [**C++ Projects**](./cpp-projects)
 - [**Fullstack Projects**](./fullstack-projects)
-- [**HTML/PHP Projects**](./html-php-projects)
 - [**Lisp Projects**](./lisp-projects)
 - [**Python Projects**](./python-projects)
 - [**R Projects**](./r-projects)
-- [**System Projects**](./system-projects)
+- [**System Projects**](./systems-projects)
+- [**Web Projects**](./web-projects)
   
 📌 Notes
 Each project folder contains its own README.md with detailed explanations, setup instructions, and implementation details.
