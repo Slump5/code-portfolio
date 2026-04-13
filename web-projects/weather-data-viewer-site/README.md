@@ -1,4 +1,4 @@
-# Skyview Weather Database Viewer Site and App Final Build
+# Weather Data Viewer Site
 
 ## Overview
 Skyview is a PHP-based web application designed for interactively viewing weather data from a MySQL database. It features a user-friendly interface with login functionality, including Google OAuth 2.0 support, and allows users to dynamically select and display weather-related tables (WeatherReports, Locations, Forecasts). The application supports responsive design for both desktop and mobile platforms, ensuring accessibility across devices. It fulfills the requirements of Project 2 for CSCI411/511 Database Theory & Design, including secure session management, dynamic table rendering, and a clean UI/UX.
@@ -29,7 +29,7 @@ Skyview is a PHP-based web application designed for interactively viewing weathe
 - **weather_ui.php.save:** Backup version of `weather_ui.php` with slightly different styling.
 - **composer.json / composer.lock:** Manages dependencies for the Google API Client Library.
 - **presentation.pptx:** Presentation outlining project development steps.
-- **project-report.pdf:** Includes implementation details, system design decisions, and screenshots demonstrating application functionality and features.
+- **project-report.pdf:** Overview of the application with implementation details and screenshots of key features.
 - **instructions.pdf:** Project requirements and objectives from Dr. Adriano Cavalcanti.
 - **presentation-final-weather-database-viewer-site-and-app.mkv:** Video presentation of the project (not included in code but referenced).
 
