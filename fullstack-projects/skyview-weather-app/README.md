@@ -1,4 +1,4 @@
-# SkyView Weather App Final Build
+# SkyView Weather App
 
 ## Overview
 SkyView is a full-stack, responsive weather tracking application developed using React Native (Expo) for the frontend and PHP/MySQL for the backend. The app allows users to register, log in, add weather reports, search weather by city, view an interactive map, display database tables, and provide feedback visualized in a pie chart. It is hosted on a Google Cloud VPS running Ubuntu with Apache, PHP, and MySQL, and integrates with the OpenWeatherMap API for geolocation data. The project demonstrates skills in frontend design, backend integration, database management, and deployment. This app was made entirely by me as part of a solo group (group 9).
