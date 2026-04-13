@@ -1,0 +1,34 @@
+!pip install pyspark delta-spark gcsfs google-cloud-storage
+!apt-get install openjdk-8-jdk-headless -qq > /dev/null
+!wget -q https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop3-2.2.5.jar
+
+from pyspark.sql import SparkSession
+
+# Create Spark session with GCS and Delta Lake support
+spark = SparkSession.builder \
+    .appName("DeltaGCS") \
+    .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0") \
+    .config("spark.driver.extraClassPath", "/content/gcs-connector-hadoop3-2.2.5.jar") \
+    .config("spark.hadoop.fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem") \
+    .config("spark.hadoop.fs.gs.auth.service.account.enable", "true") \
+    .config("spark.hadoop.fs.gs.auth.service.account.json.keyfile", "key.json") \
+    .getOrCreate()
+
+from google.colab import files
+files.upload()  # Upload key.json
+
+from google.colab import auth
+auth.authenticate_user()
+
+import requests
+
+url = "http://34.57.2.236"
+
+# Sending a request to the NGINX server which proxies to Spark
+response = requests.get(url)
+
+print("Response Status Code:", response.status_code)
+print("Response Content:", response.text)
+
+df = spark.read.csv("gs://my-midterm-project-bucket/sample_data.csv", header=True)
+df.show()

@@ -1,0 +1,10 @@
+// main.rs
+use reqwest::blocking::get;
+
+fn main() {
+    println!("Hello from the Rust container!");
+
+    // Make a request to the NGINX server
+    let response = get("http://nginx_container:80").unwrap();
+    println!("Response Status: {}", response.status());
+}
