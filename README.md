@@ -19,7 +19,7 @@ A full-stack mobile weather application built using React Native (Expo) for the 
 
 **Tech Stack:** React Native, PHP, MySQL, JavaScript, Expo, REST APIs, VPS (Ubuntu/Apache)
 
-📁 Location: `fullstack-projects/skyview-weather-app`
+🔗 [View Project](./fullstack-projects/skyview-weather-app)
 
 <br>
 
@@ -35,7 +35,7 @@ A full-stack financial portfolio management application built with Flask, SQLite
 
 **Tech Stack:** Flask, SQLite, MongoDB, JavaScript, Chart.js
 
-📁 Location: `fullstack-projects/finance-portfolio-app`
+🔗 [View Project](./fullstack-projects/finance-portfolio-app)
 
 <br>
 
@@ -52,7 +52,7 @@ A live multi-page business website developed for a real-world service company, f
 **Tech Stack:** HTML, CSS, JavaScript
 
 🌐 **Live Site:** https://royalwindowcleaninginc.com/  
-📁 Location: `html-php-projects/royal-window-cleaning-live-site`
+🔗 [View Project](./html-php-projects/royal-window-cleaning-live-site)
 
 ## 📂 Project Categories
 
