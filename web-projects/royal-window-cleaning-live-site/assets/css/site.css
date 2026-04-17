@@ -1683,6 +1683,10 @@ margin-bottom:5px;
 margin-bottom:6px;
 }
 
+.service-text h1{
+  margin-top: -20px;
+}
+
 .star{
   flex-shrink:0;
   width:20px;
@@ -1693,5 +1697,15 @@ display:flex;
 align-items:flex-start;
 gap:8px;
 text-align:left;
+}
+
+.service-video-box{
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+.gutter-slider{
+  margin-top: -20px;
+  
 }
 }
